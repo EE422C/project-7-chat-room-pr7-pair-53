@@ -17,11 +17,14 @@ import javafx.stage.Stage;
 public class MultiThreadChatServer extends Application
 { // Text area for displaying contents
 
+	FXMLLoader loader = new FXMLLoader();
+	ServerGUIController server;
+
     // Number a client
     private int clientNo = 0;
 
     @Override // Override the start method in the Application class
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception {
         // Create a scene and place it in the stage
 				// Create a scene and place it in the stage
 				loader.setLocation(getClass().getResource("ServerGUI.fxml"));
