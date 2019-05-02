@@ -1,0 +1,30 @@
+@font-face {
+    -fx-font-family: SFHeavy ;
+    src: url("ServerGraphics/Fonts/SF-Heavy.otf");
+}
+
+.root {
+    -fx-shadow-highlight-color: #ffffff;
+    -fx-background: #ffffff;
+    -fx-base: #ffffff;
+    -fx-outer-border: #007AFF;
+    -fx-color: -fx-base;
+    -fx-body-color: #ffffff;
+    -fx-text-base-color: #ffffff;
+    -fx-dark-text-color: black;
+    -fx-mid-text-color: #333333;
+}
+
+.button{
+    -fx-text-fill:#007AFF;
+    -fx-background-color: #ffffff;
+    -fx-border-color:#007AFF;
+    -fx-border-radius: .25em ;
+}
+
+.button:pressed{
+    -fx-text-fill: #005ab4;
+    -fx-background-color: #cdcdcd;
+    -fx-border-color:#005ab4;
+    -fx-border-radius: .25em ;
+}

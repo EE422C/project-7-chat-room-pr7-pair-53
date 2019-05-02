@@ -20,13 +20,13 @@ public class MultiThreadChatServer extends Application
 	private int clientNo = 0; 
 
 	@Override // Override the start method in the Application class 
-	public void start(Stage primaryStage) { 
-		// Create a scene and place it in the stage 
-		Scene scene = new Scene(new ScrollPane(ta), 450, 200); 
-		primaryStage.setTitle("MultiThreadServer"); // Set the stage title 
-		primaryStage.setScene(scene); // Place the scene in the stage 
+	public void start(Stage primaryStage) {
+		// Create a scene and place it in the stage
+		Scene scene = new Scene(new ScrollPane(ta), 450, 200);
+		primaryStage.setTitle("MultiThreadServer"); // Set the stage title
+		primaryStage.setScene(scene); // Place the scene in the stage
 		ta.appendText("Hello, Welcome to the Multithread Server\n");
-		primaryStage.show(); // Display the stage 
+		primaryStage.show(); // Display the stage
 
 		new Thread( () -> { 
 			try {  // Create a server socket 
