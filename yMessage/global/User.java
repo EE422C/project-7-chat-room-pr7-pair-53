@@ -4,6 +4,7 @@ import static java.util.Calendar.DATE;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
 import java.util.GregorianCalendar;
+import java.util.Date;
 
 public class User {
 
@@ -56,6 +57,14 @@ public class User {
 
 
     }
+
+    public String adminMessage(){
+            String body = "User " + fullName() + " has joined the chat.\n";
+            if (isBirthday()){
+                body += "It is " + fullName() + "'s birthday today! Happy birthday!";
+            }
+            return body;
+        }
 
 
 }
