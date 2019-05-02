@@ -6,6 +6,8 @@ import java.net.*;
 import java.util.Date;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
@@ -14,26 +16,29 @@ import javafx.stage.Stage;
 
 public class MultiThreadChatServer extends Application
 { // Text area for displaying contents 
-	private TextArea ta = new TextArea(); 
+	private TextArea ta = new TextArea();
+
+	FXMLLoader loader=new FXMLLoader();
+	ServerGUIController server;
 
 	// Number a client 
 	private int clientNo = 0; 
 
 	@Override // Override the start method in the Application class 
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) throws Exception {
 		// Create a scene and place it in the stage
-		Scene scene = new Scene(new ScrollPane(ta), 450, 200);
-		primaryStage.setTitle("MultiThreadServer"); // Set the stage title
-		primaryStage.setScene(scene); // Place the scene in the stage
-		ta.appendText("Hello, Welcome to the Multithread Server\n");
+		loader.setLocation(getClass().getResource("ServerGUI.fxml"));
+		Parent root = loader.load();
+		server=loader.getController();
+		primaryStage.setTitle("yMessage Server");
+		primaryStage.setScene(new Scene(root));
 		primaryStage.show(); // Display the stage
 
 		new Thread( () -> { 
 			try {  // Create a server socket 
 				@SuppressWarnings("resource")
-				ServerSocket serverSocket = new ServerSocket(8000); 
-				ta.appendText("MultiThreadServer started at " 
-						+ new Date() + '\n'); 
+				ServerSocket serverSocket = new ServerSocket(8000);
+				server.postToServer("MultiThreadServer started at "+ new Date() + '\n');
 
 
 				while (true) { 
@@ -45,14 +50,14 @@ public class MultiThreadChatServer extends Application
 
 					Platform.runLater( () -> { 
 						// Display the client number 
-						ta.appendText("Starting thread for client " + clientNo +
-								" at " + new Date() + '\n'); 
+						server.postToServer("Starting thread for client " + clientNo +
+								" at " + new Date() + '\n');
 
 						// Find the client's host name, and IP address 
 						InetAddress inetAddress = socket.getInetAddress();
-						ta.appendText("Client " + clientNo + "'s host name is "
+						server.postToServer("Client " + clientNo + "'s host name is "
 								+ inetAddress.getHostName() + "\n");
-						ta.appendText("Client " + clientNo + "'s IP Address is " 
+						server.postToServer("Client " + clientNo + "'s IP Address is " 
 								+ inetAddress.getHostAddress() + "\n");	}); 
 
 
@@ -90,9 +95,9 @@ public class MultiThreadChatServer extends Application
 					// Send area back to the client
 					outputToClient.writeDouble(area);
 					Platform.runLater(() -> { 
-						ta.appendText("radius received from client: " +
+						server.postToServer("radius received from client: " +
 								radius + '\n'); 
-						ta.appendText("Area found: " + area + '\n');
+						server.postToServer("Area found: " + area + '\n');
 					});
 				}
 			} catch(IOException e) {

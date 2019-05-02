@@ -2,15 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac00c330-0b4c-484a-a060-838af93c85c3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/cssdialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yMessage/client/ClientGUIController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yMessage/server/ServerFXMLTester.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yMessage/server/ServerGUIController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yMessage/server/ServerGUIStyles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yMessage/server/ServerGraphics/logo_stacked.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-7-chat-room-pr7-pair-53/server/MultiThreadChatServer$HandleAClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-7-chat-room-pr7-pair-53/server/MultiThreadChatServer$HandleAClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-7-chat-room-pr7-pair-53/server/MultiThreadChatServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-7-chat-room-pr7-pair-53/server/MultiThreadChatServer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-7-chat-room-pr7-pair-53/server/ServerGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-7-chat-room-pr7-pair-53/server/ServerGUI.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/project-7-chat-room-pr7-pair-53/server/ServerGUIController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/project-7-chat-room-pr7-pair-53/server/ServerGUIController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yMessage/server/MultiThreadChatServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/yMessage/server/MultiThreadChatServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yMessage/server/ServerGUI.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/yMessage/server/ServerGUI.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yMessage/server/ServerGUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/yMessage/server/ServerGUIController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,26 +24,27 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/yMessage/server/ServerFXMLTester.java">
+        <entry file="file://$PROJECT_DIR$/yMessage/server/ServerGUIController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+            <state relative-caret-position="424">
+              <caret line="38" column="35" selection-start-line="38" selection-start-column="35" selection-end-line="38" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#984#985#0" expanded="true" />
+                <element signature="e#1011#1012#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/yMessage/server/ServerGUIController.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/yMessage/server/MultiThreadChatServer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
+            <state relative-caret-position="907">
+              <caret line="99" column="43" selection-start-line="99" selection-start-column="43" selection-end-line="99" selection-end-column="43" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#666#667#0" expanded="true" />
-                <element signature="e#700#701#0" expanded="true" />
+                <element signature="e#2369#2370#0" expanded="true" />
+                <element signature="e#2399#2400#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -53,27 +53,30 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/yMessage/server/ServerGUI.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            <state relative-caret-position="270">
+              <caret line="18" column="98" selection-start-line="18" selection-start-column="98" selection-end-line="18" selection-end-column="98" />
             </state>
           </provider>
           <provider editor-type-id="JavaFX-Scene-Builder" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/yMessage/server/ServerGUIStyles.css">
+        <entry file="file://$PROJECT_DIR$/yMessage/server/ServerFXMLTester.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="29" lean-forward="true" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
+            <state relative-caret-position="255">
+              <caret line="17" column="28" selection-start-line="14" selection-start-column="8" selection-end-line="17" selection-end-column="28" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/yMessage/server/MultiThreadChatServer.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/yMessage/server/ServerGUIStyles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-413">
-              <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+            <state relative-caret-position="390">
+              <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -87,15 +90,23 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>server_stats</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>//server_stats</replace>
+    </replaceStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/yMessage/server/ServerGUI.fxml" />
         <option value="$PROJECT_DIR$/yMessage/server/ServerGUIStyles.css" />
         <option value="$PROJECT_DIR$/yMessage/server/ServerFXMLTester.java" />
+        <option value="$PROJECT_DIR$/yMessage/server/ServerGUI.fxml" />
         <option value="$PROJECT_DIR$/yMessage/server/ServerGUIController.java" />
         <option value="$PROJECT_DIR$/yMessage/server/MultiThreadChatServer.java" />
       </list>
@@ -172,7 +183,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ServerFXMLTester">
+  <component name="RunManager" selected="Application.MultiThreadChatServer">
+    <configuration name="ChatClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="client.ChatClient" />
+      <module name="project-7-chat-room-pr7-pair-53" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MultiThreadChatServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.MultiThreadChatServer" />
       <module name="project-7-chat-room-pr7-pair-53" />
@@ -199,10 +223,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.ChatClient" />
+      <item itemvalue="Application.MultiThreadChatServer" />
+      <item itemvalue="Application.ServerFXMLTester" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ServerFXMLTester" />
         <item itemvalue="Application.MultiThreadChatServer" />
+        <item itemvalue="Application.ChatClient" />
+        <item itemvalue="Application.ServerFXMLTester" />
       </list>
     </recent_temporary>
   </component>
@@ -216,16 +246,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1556750413664</updated>
-      <workItem from="1556755471982" duration="4123000" />
+      <workItem from="1556755471982" duration="14091000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4123000" />
+    <option name="totallyTimeSpent" value="14091000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1152" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25239617" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -236,7 +265,7 @@
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32924527" />
       <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32924527" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -245,7 +274,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32924527" />
       <window_info anchor="right" id="Database" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -282,17 +311,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/yMessage/client/ChatClient.java">
+    <entry file="file://$PROJECT_DIR$/yMessage/server/ServerGUIStyles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="42" selection-start-line="42" selection-end-line="42" />
+        <state relative-caret-position="390">
+          <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home/javafx-src.zip!/com/sun/javafx/application/LauncherImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="388" column="23" selection-start-line="388" selection-start-column="23" selection-end-line="388" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_202.jdk/Contents/Home/src.zip!/java/lang/Runnable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="67" column="25" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/yMessage/server/ServerFXMLTester.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+        <state relative-caret-position="255">
+          <caret line="17" column="28" selection-start-line="14" selection-start-column="8" selection-end-line="17" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -301,35 +344,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/yMessage/server/ServerGUI.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        <state relative-caret-position="270">
+          <caret line="18" column="98" selection-start-line="18" selection-start-column="98" selection-end-line="18" selection-end-column="98" />
         </state>
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/yMessage/server/ServerGUIStyles.css">
+    <entry file="file://$PROJECT_DIR$/yMessage/client/ChatClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="29" lean-forward="true" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
+        <state relative-caret-position="221">
+          <caret line="52" column="39" selection-start-line="52" selection-start-column="39" selection-end-line="52" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/yMessage/server/ServerGUIController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
+        <state relative-caret-position="424">
+          <caret line="38" column="35" selection-start-line="38" selection-start-column="35" selection-end-line="38" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#666#667#0" expanded="true" />
-            <element signature="e#700#701#0" expanded="true" />
+            <element signature="e#984#985#0" expanded="true" />
+            <element signature="e#1011#1012#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/yMessage/server/MultiThreadChatServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-413">
-          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+        <state relative-caret-position="907">
+          <caret line="99" column="43" selection-start-line="99" selection-start-column="43" selection-end-line="99" selection-end-column="43" />
+          <folding>
+            <element signature="e#2369#2370#0" expanded="true" />
+            <element signature="e#2399#2400#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
