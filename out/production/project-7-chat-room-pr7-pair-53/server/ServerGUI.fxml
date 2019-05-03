@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="450.0" stylesheets="@ServerGUIStyles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.ServerGUIController">
+   <children>
+      <Button fx:id="stats_button" layoutX="150.0" layoutY="257.0" mnemonicParsing="false" onAction="#showStats" stylesheets="@ServerGUIStyles.css" text="Show Stats for Nerds" />
+      <Label layoutX="68.0" layoutY="10.0" prefHeight="50.0" prefWidth="196.0" text="yMessage">
+         <font>
+            <Font name="Helvetica Neue Bold" size="40.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="50.0" layoutX="10.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../client/ClientGraphics/logo.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="87.0" layoutY="109.0" prefHeight="82.0" prefWidth="284.0" text="Designed by Team53 in Texas&#10;Based off of code from Daniel Liang&#10;Release 2019.1.0" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="Helvetica Neue Thin" size="19.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="background" fitHeight="177.0" fitWidth="413.0" layoutX="19.0" layoutY="69.0" opacity="0.0" pickOnBounds="true">
+         <image>
+            <Image url="@ServerGraphics/back.png" />
+         </image>
+      </ImageView>
+      <ScrollPane fx:id="server_window" hbarPolicy="NEVER" hmax="0.0" layoutX="19.0" layoutY="68.0" opacity="0.0" prefHeight="178.0" prefWidth="413.0" style="-fx-background-color: #FFFFFF;">
+         <content>
+            <TextArea fx:id="server_stats" editable="false" prefHeight="176.0" prefWidth="413.0" wrapText="true" />
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
