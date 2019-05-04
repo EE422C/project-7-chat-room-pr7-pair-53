@@ -78,8 +78,8 @@ public class User implements Serializable {
 
     }
 
-    public Message adminMessage(){
-            String body = "User " + fullName() + " has joined the chat.\n";
+    public Message welcomeMessage(){
+            String body = "User " + fullName() + " has joined the chat.";
             if (isBirthday()){
                 body += "It is " + fullName() + "'s birthday today! Happy birthday!";
             }

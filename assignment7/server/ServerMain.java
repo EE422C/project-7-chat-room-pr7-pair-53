@@ -3,9 +3,11 @@ package server;/* From Daniel Liang's book */
 
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 import global.Message;
+import global.User;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +18,7 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 
-public class yMessageServer extends Application
+public class ServerMain extends Application
 { // Text area for displaying contents
 
 	FXMLLoader loader = new FXMLLoader();
@@ -24,6 +26,7 @@ public class yMessageServer extends Application
 
     // Number a client
     private int clientNo = 0;
+    ArrayList<User> activeUsers=new ArrayList<>();
 
     @Override // Override the start method in the Application class
     public void start(Stage primaryStage) throws Exception {
@@ -96,6 +99,8 @@ public class yMessageServer extends Application
                     Message message = new Message();
 
                         message.setBody(inputFromClient.readUTF());
+
+
 
 
                     //NEW STUFF DYLAN ADDED*************************

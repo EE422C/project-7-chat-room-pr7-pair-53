@@ -15,7 +15,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-public class yMessageClient extends Application {
+public class ClientMain extends Application {
 	// IO streams
 	static DataOutputStream toServer = null;
 	static DataInputStream fromServer = null;
@@ -37,7 +37,7 @@ public class yMessageClient extends Application {
 		primaryStage.show(); // Display the stage
 
 		try {
-			// Create a socket to connect to the server 
+			// Create a socket to connect to the server
 			@SuppressWarnings("resource")
 			Socket socket = new Socket("localhost", 8000);
 
@@ -45,7 +45,7 @@ public class yMessageClient extends Application {
 			toServer=new DataOutputStream(socket.getOutputStream());
 			fromServer = new DataInputStream(socket.getInputStream());
 
-			// Create an output stream to send data to the server 
+			// Create an output stream to send data to the server
 			//toServer = new DataOutputStream(socket.getOutputStream());
 		}
 		catch (IOException ex) {
@@ -58,6 +58,7 @@ public class yMessageClient extends Application {
 		//		user = new global.User((String)userData.get(0), (String)userData.get(1), (int)userData.get(2), (int)userData.get(3),(int)userData.get(4), (int)userData.get(5));
 		// user = new global.User();
 		client.displayMessage(user.adminMessage().getBody());
+		client.displayMessage(user.welcomeMessage().getBody());
 	}
 
 	public static void sendMessage(){
