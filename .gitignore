@@ -1,4 +1,9 @@
 
+.idea/
 .idea
+.out/
 .out
 .DS_Store
+.idea/workspace.xml
+*.xml
+*.class
