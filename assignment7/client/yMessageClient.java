@@ -17,8 +17,7 @@ import javafx.stage.Stage;
 
 public class yMessageClient extends Application {
 	// IO streams
-    static ObjectOutputStream toServ=null;
-	//static DataOutputStream toServer = null;
+	static DataOutputStream toServer = null;
 	static DataInputStream fromServer = null;
 	static public User user;
 
@@ -42,12 +41,12 @@ public class yMessageClient extends Application {
 			@SuppressWarnings("resource")
 			Socket socket = new Socket("localhost", 8000);
 
-			// Create an input stream to receive data from the server 
+			// Create an input stream to receive data from the server
+			toServer=new DataOutputStream(socket.getOutputStream());
 			fromServer = new DataInputStream(socket.getInputStream());
 
 			// Create an output stream to send data to the server 
 			//toServer = new DataOutputStream(socket.getOutputStream());
-			toServ=new ObjectOutputStream(socket.getOutputStream());
 		}
 		catch (IOException ex) {
 			client.displayMessage(ex.toString());
@@ -56,7 +55,7 @@ public class yMessageClient extends Application {
 
 	public static void userInit(ArrayList<Object> userData){
 		user = new global.User((String)userData.get(0), (String)userData.get(1), (int)userData.get(2), (int)userData.get(3),(int)userData.get(4));
-		client.displayMessage(user.adminMessage());
+		client.displayMessage(user.adminMessage().getBody());
 	}
 
 	public static void sendMessage(){
@@ -64,21 +63,20 @@ public class yMessageClient extends Application {
 			// Get the radius from the text field
 			//double radius = Double.parseDouble(tf.getText().trim());
 
-			String text = client.getMessage().trim();
+			//String text = client.getMessage().trim();
+			String text = client.send_text.getText();
 
-            Message message = new Message(user,user,text,false);
+			ArrayList<User> to = new ArrayList<>();
+			to.add(user);
+            Message message = new Message(user,to,text,false);
 
-            toServ.writeObject(message);
-            toServ.flush();
-			//toServer.writeUTF(text);
-			//toServer.flush();
-
-			// Get area from the server
-			String textback = fromServer.readUTF().trim();
 
 			// Display to the text area
 			client.displayMessage(user.fullName()+": " + text);
-			client.displayMessage(textback);
+
+
+			toServer.writeUTF(message.getBody());
+			toServer.flush();
 
 		}
 		catch (IOException ex) {

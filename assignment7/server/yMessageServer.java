@@ -87,36 +87,35 @@ public class yMessageServer extends Application
         public void run() {
             try {
                 // Create data input and output streams
-                ObjectInputStream inputFromClient = new ObjectInputStream( socket.getInputStream());
-                ObjectOutputStream outputToClient = new ObjectOutputStream( socket.getOutputStream());
+                DataOutputStream outputToClient = new DataOutputStream( socket.getOutputStream());
+                DataInputStream inputFromClient = new DataInputStream( socket.getInputStream());
                 // Continuously serve the client
                 while (true) {
                     // Receive radius from the client
                     //String text = inputFromClient.readUTF();
                     Message message = new Message();
 
+                        message.setBody(inputFromClient.readUTF());
 
-                    try {
-                        message = (Message) inFromClient.readObject();
-                    }catch (Exception e){
-                        System.out.println("oof");
-                    }
 
                     //NEW STUFF DYLAN ADDED*************************
                     //global.Message message = new global.Message();
                     //message.setBody(text);
 
                     String text=message.getBody();
+                    outputToClient.writeUTF(message.getBody());
 
 
                     // Compute area
                     String textback = "SENT to the server at " + message.printTime();
-                    // Send area back to the client
-                    outputToClient.writeUTF(textback);
+                    Message message1 = new Message();
+                    message1.setBody(textback);
+                    outputToClient.writeUTF(message1.getBody());
+
                     Platform.runLater(() -> {
                         server.postToServer("Client " + clientNo + ": " +
                                 text);
-                        server.postToServer(textback);
+                        server.postToServer(message1.getBody());
                     });
                 }
             } catch(IOException e) {
