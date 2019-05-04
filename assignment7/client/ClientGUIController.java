@@ -35,10 +35,10 @@ public class ClientGUIController implements Initializable {
 
     public void send(){
 System.out.println("sent");
-displayMessage(send_text.getText());
-send_text.clear();
+//displayMessage(send_text.getText());
     //typingNoteSent=false;
         yMessageClient.sendMessage();
+        send_text.clear();
     }
 
 //    public void typing(){

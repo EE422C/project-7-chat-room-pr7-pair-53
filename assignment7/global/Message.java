@@ -12,22 +12,22 @@ import java.io.ObjectOutputStream;
 public class Message implements Serializable{
 
     private User from;
-    private ArrayList<User> to;
+    private User to;
     private String body;
-    private boolean adminmode;
+    private int adminmode;
     transient private Thread myThread;
     private Timestamp time;
 
     public Message(){
         this.body = "";
-        this.adminmode = true;
+        this.adminmode = 0;
         this.time = new Timestamp(System.currentTimeMillis());
         this.myThread = new Thread();
     }
 
-    public Message(User from, ArrayList<User> to, String body, boolean adminmode){
+    public Message(User from, User to, String body, int adminmode){
         this.from = from;
-        this.to = new ArrayList<>(to);
+        this.to = to;
         this.body = body;
         this.adminmode = adminmode;
         this.time = new Timestamp(System.currentTimeMillis());
@@ -35,11 +35,20 @@ public class Message implements Serializable{
 
     }
 
+    public Message(String from, String to, String body, int adminmode){
+        this.from = new User();
+        this.to = new User();
+        this.from.setUsername(from);
+        this.to.setUsername(to);
+        this.body = body;
+        this.adminmode = adminmode;
+    }
+
     public void setBody(String body){
         this.body = body;
     }
 
-    public void setMode(boolean adminmode){
+    public void setMode(int adminmode){
         this.adminmode = adminmode;
     }
 
@@ -47,25 +56,6 @@ public class Message implements Serializable{
         return body;
     }
 
-    public String adminMessage(){
-        if (adminmode){
-            String tolist = "";
-            for (int i=0; i<to.size(); i++){
-                if (!to.get(i).fullName().equals(from.fullName())){
-                    tolist += to.get(i).fullName() + ", ";
-                }
-            }
-            tolist.substring(0,tolist.length()-2);
-            body = "User " + from.fullName() + " has joined the chat with user(s) " + tolist + " at " + printTime() +".\n";
-            if (from.isBirthday()){
-                body += "It is " + from.fullName() + "'s birthday today! Happy birthday!";
-            }
-            adminmode = false;
-            return body;
-        }
-        else
-            return null;
-    }
 
     public Timestamp getTime() {
         return time;
@@ -73,6 +63,28 @@ public class Message implements Serializable{
 
     public String printTime(){
         return time.toString();
+    }
+
+    public String toInfoString(){
+        String tostring = "λ/";
+        tostring += adminmode + "/" + from.getUsername() + "/" + to.getUsername() + "/" + body;
+        return tostring;
+    }
+
+    public Message parseString(String tostring){
+
+        //Message message = new Message();
+        if (tostring.substring(0,1).equals("λ")){
+            String [] separated = tostring.split("/");
+
+
+            Message message = new Message(separated[2], separated[3], separated[4], Integer.parseInt(separated[1]));
+
+            return message;
+        }
+        else{
+            return null;
+        }
     }
 }
 

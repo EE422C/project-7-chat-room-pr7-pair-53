@@ -113,7 +113,7 @@ public class yMessageServer extends Application
                     outputToClient.writeUTF(message1.getBody());
 
                     Platform.runLater(() -> {
-                        server.postToServer("Client " + clientNo + ": " +
+                        server.postToServer("CLIENT: " +
                                 text);
                         server.postToServer(message1.getBody());
                     });

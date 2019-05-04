@@ -55,6 +55,8 @@ public class yMessageClient extends Application {
 
 	public static void userInit(ArrayList<Object> userData){
 		user = new global.User((String)userData.get(0), (String)userData.get(1), (int)userData.get(2), (int)userData.get(3),(int)userData.get(4));
+		//		user = new global.User((String)userData.get(0), (String)userData.get(1), (int)userData.get(2), (int)userData.get(3),(int)userData.get(4), (int)userData.get(5));
+		// user = new global.User();
 		client.displayMessage(user.adminMessage().getBody());
 	}
 
@@ -63,16 +65,15 @@ public class yMessageClient extends Application {
 			// Get the radius from the text field
 			//double radius = Double.parseDouble(tf.getText().trim());
 
-			//String text = client.getMessage().trim();
-			String text = client.send_text.getText();
+			String text = client.getMessage().trim();
+			//String text = client.send_text.getText();
 
-			ArrayList<User> to = new ArrayList<>();
-			to.add(user);
-            Message message = new Message(user,to,text,false);
+            Message message = new Message();
+            message.setBody(text);
 
 
 			// Display to the text area
-			client.displayMessage(user.fullName()+": " + text);
+			client.displayMessage(user.getUsername()+": " + text);
 
 
 			toServer.writeUTF(message.getBody());

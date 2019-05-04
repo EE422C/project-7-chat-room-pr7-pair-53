@@ -12,7 +12,8 @@ public class User implements Serializable {
 
     private String firstname;
     private String lastname;
-    GregorianCalendar birthdate;
+    private String username;
+    private GregorianCalendar birthdate;
 
     public User (){
         this.firstname = "NEW";
@@ -21,13 +22,21 @@ public class User implements Serializable {
 
     }
 
-    public User (String firstname, String lastname){
+    public User (String firstname, String lastname, String username){
         this.firstname = firstname;
         this.lastname = lastname;
+        this.username = username;
         birthdate = new GregorianCalendar(1900, 1, 1);
     }
 
-    public User (String firstname, String lastname, int year, int month, int day){
+    public User (String firstname, String lastname, String username, int year, int month, int day){
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.username = username;
+        birthdate = new GregorianCalendar(year, month, day);
+    }
+
+    public User (String firstname, String lastname,  int year, int month, int day){
         this.firstname = firstname;
         this.lastname = lastname;
         birthdate = new GregorianCalendar(year, month, day);
@@ -36,6 +45,15 @@ public class User implements Serializable {
     public String fullName(){
         return firstname + " " + lastname;
     }
+
+    public String getUsername(){
+        return username;
+    }
+
+    public void setUsername(String user){
+        username = user;
+    }
+
 
     public GregorianCalendar getBirthdate(){
         return birthdate;
