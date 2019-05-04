@@ -3,10 +3,12 @@ package global;
 import static java.util.Calendar.DATE;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
+
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
 
     private String firstname;
     private String lastname;

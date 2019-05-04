@@ -4,6 +4,8 @@ package server;/* From Daniel Liang's book */
 import java.io.*;
 import java.net.*;
 import java.util.Date;
+
+import global.Message;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -85,16 +87,28 @@ public class yMessageServer extends Application
         public void run() {
             try {
                 // Create data input and output streams
-                DataInputStream inputFromClient = new DataInputStream( socket.getInputStream());
+                ObjectInputStream inFromClient=new ObjectInputStream(socket.getInputStream());
+
+                //DataInputStream inputFromClient = new DataInputStream( socket.getInputStream());
                 DataOutputStream outputToClient = new DataOutputStream( socket.getOutputStream());
                 // Continuously serve the client
                 while (true) {
                     // Receive radius from the client
-                    String text = inputFromClient.readUTF();
+                    //String text = inputFromClient.readUTF();
+                    Message message = new Message();
+
+
+                    try {
+                        message = (Message) inFromClient.readObject();
+                    }catch (Exception e){
+                        System.out.println("oof");
+                    }
 
                     //NEW STUFF DYLAN ADDED*************************
-                    global.Message message = new global.Message();
-                    message.setBody(text);
+                    //global.Message message = new global.Message();
+                    //message.setBody(text);
+
+                    String text=message.getBody();
 
 
                     // Compute area

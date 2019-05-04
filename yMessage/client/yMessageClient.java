@@ -5,6 +5,8 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 
+import global.Message;
+import global.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,10 +16,11 @@ import javafx.stage.Stage;
 
 
 public class yMessageClient extends Application {
-	// IO streams 
-	static DataOutputStream toServer = null;
+	// IO streams
+    static ObjectOutputStream toServ=null;
+	//static DataOutputStream toServer = null;
 	static DataInputStream fromServer = null;
-	static public global.User user;
+	static public User user;
 
 	FXMLLoader loader = new FXMLLoader();
 	static ClientGUIController client;
@@ -43,7 +46,8 @@ public class yMessageClient extends Application {
 			fromServer = new DataInputStream(socket.getInputStream());
 
 			// Create an output stream to send data to the server 
-			toServer = new DataOutputStream(socket.getOutputStream());
+			//toServer = new DataOutputStream(socket.getOutputStream());
+			toServ=new ObjectOutputStream(socket.getOutputStream());
 		}
 		catch (IOException ex) {
 			client.displayMessage(ex.toString());
@@ -62,9 +66,12 @@ public class yMessageClient extends Application {
 
 			String text = client.getMessage().trim();
 
-			// Send the radius to the server
-			toServer.writeUTF(text);
-			toServer.flush();
+            Message message = new Message(user,user,text,false);
+
+            toServ.writeObject(message);
+            toServ.flush();
+			//toServer.writeUTF(text);
+			//toServer.flush();
 
 			// Get area from the server
 			String textback = fromServer.readUTF().trim();
