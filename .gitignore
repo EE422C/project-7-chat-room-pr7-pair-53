@@ -7,3 +7,4 @@
 .idea/workspace.xml
 *.xml
 *.class
+.DS_Store
