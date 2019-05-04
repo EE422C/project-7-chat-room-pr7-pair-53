@@ -17,10 +17,9 @@ import javafx.stage.Stage;
 
 public class ClientMain extends Application {
 	// IO streams
-    static ObjectOutputStream toServer=null;
-	static ObjectInputStream fromServer = null;
-	static User user;
-
+	static DataOutputStream toServer = null;
+	static DataInputStream fromServer = null;
+	static public User user;
 
 	FXMLLoader loader = new FXMLLoader();
 	static ClientGUIController client;
@@ -38,15 +37,16 @@ public class ClientMain extends Application {
 		primaryStage.show(); // Display the stage
 
 		try {
-			// Create a socket to connect to the server 
+			// Create a socket to connect to the server
 			@SuppressWarnings("resource")
 			Socket socket = new Socket("localhost", 8000);
 
-			// Create an input stream to receive data from the server 
-			fromServer = new ObjectInputStream(socket.getInputStream());
+			// Create an input stream to receive data from the server
+			toServer=new DataOutputStream(socket.getOutputStream());
+			fromServer = new DataInputStream(socket.getInputStream());
 
-			// Create an output stream to send data to the server 
-			toServer=new ObjectOutputStream(socket.getOutputStream());
+			// Create an output stream to send data to the server
+			//toServer = new DataOutputStream(socket.getOutputStream());
 		}
 		catch (IOException ex) {
 			client.displayMessage(ex.toString());
@@ -63,26 +63,20 @@ public class ClientMain extends Application {
 			// Get the radius from the text field
 			//double radius = Double.parseDouble(tf.getText().trim());
 
-			String text = client.getMessage().trim();
+			//String text = client.getMessage().trim();
+			String text = client.send_text.getText();
 
-			ArrayList<User> to=new ArrayList<>();
+			ArrayList<User> to = new ArrayList<>();
 			to.add(user);
-            Message message = new Message(user,to,text,0);
+            Message message = new Message(user,to,text,false);
 
-            toServer.writeObject(message);
-            toServer.flush();
-
-			// Get area from the server
-			message = new Message();
-			try {
-				message = (Message) fromServer.readObject();
-			}catch (Exception e){
-				System.out.println("oof");
-			}
 
 			// Display to the text area
 			client.displayMessage(user.fullName()+": " + text);
-			client.displayMessage(message.getBody());
+
+
+			toServer.writeUTF(message.getBody());
+			toServer.flush();
 
 		}
 		catch (IOException ex) {
