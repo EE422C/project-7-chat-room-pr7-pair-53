@@ -51,7 +51,7 @@ public class yMessageServer extends Application
 
                     Platform.runLater( () -> {
                         // Display the client number
-                        server.postToServer("Starting thread for client " + clientNo +
+                        server.postToServer("Starting thread for Client " + clientNo +
                                 " at " + new Date());
 
                         // Find the client's host name, and IP address
@@ -85,8 +85,8 @@ public class yMessageServer extends Application
         public void run() {
             try {
                 // Create data input and output streams
-                DataInputStream inputFromClient = new DataInputStream( socket.getInputStream());
-                DataOutputStream outputToClient = new DataOutputStream( socket.getOutputStream());
+                ObjectInputStream inputFromClient = new ObjectInputStream( socket.getInputStream());
+                ObjectOutputStream outputToClient = new ObjectOutputStream( socket.getOutputStream());
                 // Continuously serve the client
                 while (true) {
                     // Receive radius from the client
