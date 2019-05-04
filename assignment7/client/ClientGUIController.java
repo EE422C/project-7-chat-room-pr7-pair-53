@@ -1,16 +1,20 @@
 package client;
 
+import javafx.beans.InvalidationListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Accordion;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ClientGUIController implements Initializable {
 
@@ -24,13 +28,21 @@ public class ClientGUIController implements Initializable {
     @FXML TextArea message_window;
     @FXML TextField fname;
     @FXML TextField lname;
+    @FXML TextField username;
     @FXML TextField birth;
+    @FXML ListView DMs;
+    @FXML ListView room_sel;
+
+    String chattingWith="Server-wide";
 
     //boolean typingNoteSent=false;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        window.setDisable(true);
+        //window.setDisable(true);
+        room_sel.setItems(FXCollections.observableArrayList("Server-wide","One Room","Two Room","Red Room","Blue Room"));
+        ObservableList<String> users= FXCollections.observableArrayList("Guy","Dylan","Chad","Brad");
+        DMs.setItems(users);
     }
 
     public void send(){
@@ -38,7 +50,7 @@ System.out.println("sent");
 displayMessage(send_text.getText());
 send_text.clear();
     //typingNoteSent=false;
-        yMessageClient.sendMessage();
+        ClientMain.sendMessage();
     }
 
 //    public void typing(){
@@ -67,9 +79,24 @@ send_text.clear();
         data.add(Integer.parseInt(DOB[0]));
         data.add(Integer.parseInt(DOB[1]));
         window.setDisable(false);
-        yMessageClient.userInit(data);
+        ClientMain.userInit(data);
     }
 
+    public void selectRoom(){
+        String newRoom=room_sel.getSelectionModel().getSelectedItem().toString();
+        if(!chattingWith.equals(newRoom)) {
+            System.out.println(newRoom);
+            chattingWith = newRoom;
+        }
+    }
+
+    public void selectDM(){
+        String newRoom=DMs.getSelectionModel().getSelectedItem().toString();
+        if(!chattingWith.equals(newRoom)) {
+            System.out.println(newRoom);
+            chattingWith = newRoom;
+        }
+    }
 
 
 }

@@ -3,9 +3,11 @@ package server;/* From Daniel Liang's book */
 
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 import global.Message;
+import global.User;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +18,7 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 
-public class yMessageServer extends Application
+public class ServerMain extends Application
 { // Text area for displaying contents
 
 	FXMLLoader loader = new FXMLLoader();
@@ -24,6 +26,7 @@ public class yMessageServer extends Application
 
     // Number a client
     private int clientNo = 0;
+    ArrayList<User> activeUsers=new ArrayList<>();
 
     @Override // Override the start method in the Application class
     public void start(Stage primaryStage) throws Exception {
@@ -94,13 +97,13 @@ public class yMessageServer extends Application
                     // Receive radius from the client
                     //String text = inputFromClient.readUTF();
                     Message message = new Message();
-
-
                     try {
-                        message = (Message) inFromClient.readObject();
+                        message = (Message) inputFromClient.readObject();
                     }catch (Exception e){
                         System.out.println("oof");
                     }
+
+
 
                     //NEW STUFF DYLAN ADDED*************************
                     //global.Message message = new global.Message();
@@ -112,7 +115,7 @@ public class yMessageServer extends Application
                     // Compute area
                     String textback = "SENT to the server at " + message.printTime();
                     // Send area back to the client
-                    outputToClient.writeUTF(textback);
+                    outputToClient.writeObject(textback);
                     Platform.runLater(() -> {
                         server.postToServer("Client " + clientNo + ": " +
                                 text);

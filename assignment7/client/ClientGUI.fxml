@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import java.net.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
@@ -7,7 +9,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="600.0" stylesheets="@ClientGUIStyles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.ClientGUIController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.ClientGUIController">
    <children>
       <StackPane prefHeight="429.0" prefWidth="600.0">
          <children>
@@ -15,6 +17,28 @@
             <children>
                <AnchorPane prefHeight="200.0" prefWidth="300.0">
                   <children>
+                        <TabPane fx:id="chats_sel" layoutY="80.0" prefHeight="349.0" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab text="           Grext            ">
+                                 <content>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <ListView fx:id="room_sel" onMouseClicked="#selectRoom" prefHeight="130.0" prefWidth="300.0">
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                          </ListView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                            <Tab text="    Direct Messages    ">
+                                 <content>
+                                    <ListView fx:id="DMs" onMouseClicked="#selectDM" prefHeight="200.0" prefWidth="200.0" />
+                                 </content>
+                              </Tab>
+                          </tabs>
+                        </TabPane>
                      <ImageView fitHeight="150.0" fitWidth="50.0" layoutX="11.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
                         <image>
                            <Image url="@ClientGraphics/logo.png" />
@@ -63,16 +87,17 @@
                               <TextField fx:id="lname" promptText="Last Name" style="-fx-background-color: -fx-text-box-border, -fx-control-inner-background, transparent; -fx-border-color: #FFFFFF;" />
                            </content>
                         </CustomMenuItem>
+                        <CustomMenuItem hideOnClick="false" mnemonicParsing="false" text="Username">
+                           <content>
+                              <TextField fx:id="username" promptText="Username" style="-fx-background-color: -fx-text-box-border, -fx-control-inner-background, transparent; -fx-border-color: #FFFFFF;" />
+                           </content>
+                        </CustomMenuItem>
                         <CustomMenuItem hideOnClick="false" mnemonicParsing="false" text="Birthdate">
                            <content>
                               <TextField fx:id="birth" promptText="MM/DD/YYYY" style="-fx-background-color: -fx-text-box-border, -fx-control-inner-background, transparent; -fx-border-color: #FFFFFF;" />
                            </content>
                         </CustomMenuItem>
-                        <CustomMenuItem hideOnClick="false" mnemonicParsing="false" text="Submit">
-                           <content>
-                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#login" style="-fx-background-color: transparent; -fx-border-color: transparent;" text="Submit" />
-                           </content>
-                        </CustomMenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#login" text="Submit" />
                   </items>
                 </Menu>
               </menus>
@@ -80,4 +105,8 @@
          </children>
       </StackPane>
    </children>
+   <stylesheets>
+      <URL value="@ClientGUIStyles.css" />
+      <URL value="@ClientGUIStyles.css" />
+   </stylesheets>
 </Pane>

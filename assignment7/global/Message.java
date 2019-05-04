@@ -14,22 +14,22 @@ public class Message implements Serializable{
     private User from;
     private ArrayList<User> to;
     private String body;
-    private boolean adminmode;
+    private int mode;
     transient private Thread myThread;
     private Timestamp time;
 
     public Message(){
         this.body = "";
-        this.adminmode = true;
+        this.mode = 0;
         this.time = new Timestamp(System.currentTimeMillis());
         this.myThread = new Thread();
     }
 
-    public Message(User from, ArrayList<User> to, String body, boolean adminmode){
+    public Message(User from, ArrayList<User> to, String body, int adminmode){
         this.from = from;
         this.to = new ArrayList<>(to);
         this.body = body;
-        this.adminmode = adminmode;
+        this.mode = adminmode;
         this.time = new Timestamp(System.currentTimeMillis());
         this.myThread = new Thread();
 
@@ -39,16 +39,16 @@ public class Message implements Serializable{
         this.body = body;
     }
 
-    public void setMode(boolean adminmode){
-        this.adminmode = adminmode;
+    public void setMode(int adminmode){
+        this.mode = adminmode;
     }
 
     public String getBody(){
         return body;
     }
 
-    public String adminMessage(){
-        if (adminmode){
+    /*public String adminMessage(){
+        if (mode){
             String tolist = "";
             for (int i=0; i<to.size(); i++){
                 if (!to.get(i).fullName().equals(from.fullName())){
@@ -65,7 +65,7 @@ public class Message implements Serializable{
         }
         else
             return null;
-    }
+    }*/
 
     public Timestamp getTime() {
         return time;
