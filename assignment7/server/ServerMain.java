@@ -5,6 +5,8 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import global.Message;
 import global.User;
@@ -27,7 +29,7 @@ public class ServerMain extends Application
     // Number a client
     private int clientNo = 0;
     private ArrayList<HandleAClient> clients=new ArrayList<>();
-    ArrayList<User> activeUsers=new ArrayList<>();
+    Map<String,String> activeUsers=new HashMap<>();
 
     @Override // Override the start method in the Application class
     public void start(Stage primaryStage) throws Exception {
@@ -101,33 +103,32 @@ public class ServerMain extends Application
                 while (true) {
                     // Receive radius from the client
                     //String text = inputFromClient.readUTF();
-                    Message message1 = new Message();
-                    message1 = message1.parseString(inputFromClient.readUTF());
-                    //String textinfo = inputFromClient.readUTF();
+                    Message message = new Message();
+                    message = message.parseString(inputFromClient.readUTF());
+
+
+                    if(message.getMode()==0) {
+                        String from = message.getFrom();
+                        String body = message.getBody();
+
+                        outputToClient.writeUTF(from+":"+message.getBody());
+
+                        // Compute area
+                        String textback = "SENT to " + message.getTo() + " at " + message.printTime();
+
+                        outputToClient.writeUTF(textback);
 
 
 
-                    //NEW STUFF DYLAN ADDED*************************
-                    //global.Message message = new global.Message();
-                    //message.setBody(text);
-
-                    String text=message1.getBody();
-                    outputToClient.writeUTF(message1.getBody());
-
-
-                    // Compute area
-                    String textback = "SENT to " + message1.getTo() + " at " + message1.printTime();
-
-                    outputToClient.writeUTF(textback);
-
-                    String from = message1.getFrom();
-                    String body = message1.getBody();
-                    
-                    Platform.runLater(() -> {
-                        server.postToServer(from + ": " +
-                                body);
-                        server.postToServer(textback);
-                    });
+                        Platform.runLater(() -> {
+                            server.postToServer(from + ": " +
+                                    body);
+                            server.postToServer(textback);
+                        });
+                    }
+                    else if(message.getMode()==1){
+                        updateActiveUsers(message);
+                    }
 
 
 
@@ -140,7 +141,16 @@ public class ServerMain extends Application
 
         }
 
+        public void updateActiveUsers(Message msg){
+            if(msg.getMode()!=1)
+                return;
+            activeUsers.put(msg.getFrom(),msg.getTo());
+            System.out.println(msg.toInfoString());
+            System.out.println(activeUsers);
+        }
+
     }
+
 
 
 

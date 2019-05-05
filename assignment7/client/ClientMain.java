@@ -55,6 +55,8 @@ public class ClientMain extends Application {
 		catch (IOException ex) {
 			client.displayMessage(ex.toString());
 		}
+
+
 	}
 
 	public static void userInit(ArrayList<Object> userData){
