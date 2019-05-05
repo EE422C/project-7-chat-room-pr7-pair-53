@@ -20,6 +20,7 @@ public class ClientMain extends Application {
 	static DataOutputStream toServer = null;
 	static DataInputStream fromServer = null;
 	static public User user;
+	static String chattingWith="Broadcast";
 
 	FXMLLoader loader = new FXMLLoader();
 	static ClientGUIController client;
@@ -58,7 +59,6 @@ public class ClientMain extends Application {
 		// user = new global.User((String)userData.get(0), (String)userData.get(1), (int)userData.get(2), (int)userData.get(3),(int)userData.get(4), (int)userData.get(5));
 		// user = new global.User();
 		client.displayMessage(user.welcomeMessage().getBody());
-		client.displayMessage(user.welcomeMessage().getBody());
 	}
 
 	public static void sendMessage(){
@@ -85,6 +85,33 @@ public class ClientMain extends Application {
 			System.err.println(ex);
 		}
 	}
+
+	public static void sendMessage(String text){
+		try {
+
+			Message message = new Message();
+			message.setBody(text);
+
+
+			// Display to the text area
+			client.displayMessage(user.getUsername()+": " + text);
+
+
+			toServer.writeUTF(message.getBody());
+			toServer.flush();
+
+		}
+		catch (IOException ex) {
+			System.err.println(ex);
+		}
+	}
+
+	public static void updateUsers(){
+		Message updateMsg = new Message(user.getUsername(),null,chattingWith,3);
+		sendMessage(updateMsg.toInfoString());
+	}
+
+	public static void updateChattingWith(String s){chattingWith=s;}
 
 	public static void main(String[] args) {
 		launch(args);

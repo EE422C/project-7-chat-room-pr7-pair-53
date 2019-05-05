@@ -16,6 +16,8 @@ import javafx.scene.layout.HBox;
 import java.net.URL;
 import java.util.*;
 
+import static client.ClientMain.*;
+
 public class ClientGUIController implements Initializable {
 
     URL activeURL= ClientGUIController.class.getResource("client/ClientGraphics/send_active.png");
@@ -33,14 +35,16 @@ public class ClientGUIController implements Initializable {
     @FXML ListView DMs;
     @FXML ListView room_sel;
 
-    String chattingWith="Server-wide";
+    String chattingWith="Broadcast";
+    Map<String,String> chatHistory=new HashMap<>();
+    Map<String,String> activeUsers=new HashMap<>();
 
     //boolean typingNoteSent=false;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //window.setDisable(true);
-        room_sel.setItems(FXCollections.observableArrayList("Server-wide","One Room","Two Room","Red Room","Blue Room"));
+        room_sel.setItems(FXCollections.observableArrayList("Broadcast","One Room","Two Room","Red Room","Blue Room"));
         ObservableList<String> users= FXCollections.observableArrayList("Guy","Dylan","Chad","Brad");
         DMs.setItems(users);
     }
@@ -50,7 +54,8 @@ System.out.println("sent");
 displayMessage(send_text.getText());
 send_text.clear();
     //typingNoteSent=false;
-        ClientMain.sendMessage();
+        updateUsers();
+        sendMessage();
     }
 
 //    public void typing(){
@@ -79,23 +84,32 @@ send_text.clear();
         data.add(Integer.parseInt(DOB[0]));
         data.add(Integer.parseInt(DOB[1]));
         window.setDisable(false);
-        ClientMain.userInit(data);
+        userInit(data);
+        updateUsers();
     }
 
     public void selectRoom(){
         String newRoom=room_sel.getSelectionModel().getSelectedItem().toString();
+        chatHistory.put(chattingWith,message_window.getText());
         if(!chattingWith.equals(newRoom)) {
             System.out.println(newRoom);
             chattingWith = newRoom;
+            message_window.setText(chatHistory.get(chattingWith));
+            updateChattingWith(chattingWith);
         }
+        updateUsers();
     }
 
     public void selectDM(){
         String newRoom=DMs.getSelectionModel().getSelectedItem().toString();
+        chatHistory.put(chattingWith,message_window.getText());
         if(!chattingWith.equals(newRoom)) {
             System.out.println(newRoom);
             chattingWith = newRoom;
+            message_window.setText(chatHistory.get(chattingWith));
+            updateChattingWith(chattingWith);
         }
+        updateUsers();
     }
 
 
