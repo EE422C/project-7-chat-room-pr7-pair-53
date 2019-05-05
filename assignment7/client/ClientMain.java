@@ -76,11 +76,13 @@ public class ClientMain extends Application {
 
 
 			// Display to the text area
-			client.displayMessage(user.getUsername()+": " + text);
+            if (message.getMode()==0 && !text.equals("")) {
+                client.displayMessage(user.getUsername() + ": " + text);
 
 
-			toServer.writeUTF(message.toInfoString());
-			toServer.flush();
+                toServer.writeUTF(message.toInfoString());
+                toServer.flush();
+            }
 
 		}
 		catch (IOException ex) {
@@ -92,15 +94,17 @@ public class ClientMain extends Application {
 		try {
 
 			Message message = new Message();
-			message.setBody(text);
+			message = message.parseString(text);
 
 
 			// Display to the text area
-			client.displayMessage(user.getUsername()+": " + text);
+            if (message.getMode()==0 && !text.equals("")) {
+                client.displayMessage(user.getUsername() + ": " + text);
 
 
-			toServer.writeUTF(message.getBody());
-			toServer.flush();
+                toServer.writeUTF(message.getBody());
+                toServer.flush();
+            }
 
 		}
 		catch (IOException ex) {
@@ -109,7 +113,7 @@ public class ClientMain extends Application {
 	}
 
 	public static void updateUsers(){
-		Message updateMsg = new Message(user.getUsername(),user.getUsername(),chattingWith,3);
+		Message updateMsg = new Message(user.getUsername(),chattingWith, "",1);
 		sendMessage(updateMsg.toInfoString());
 	}
 

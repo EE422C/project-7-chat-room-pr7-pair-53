@@ -62,6 +62,10 @@ public class Message implements Serializable{
         return to.getUsername();
     }
 
+    public int getMode(){
+        return adminmode;
+    }
+
     public String getFrom(){
         return from.getUsername();
     }
@@ -76,28 +80,26 @@ public class Message implements Serializable{
     }
 
     public String toInfoString(){
-        String tostring = "";
-        tostring += adminmode + "λ" + from.getUsername() + "λ" + to.getUsername() + "λ" + body;
+        String tostring = "λ";
+        tostring += "~" + adminmode + "~" + from.getUsername() + "~" + to.getUsername() + "~" + body;
         return tostring;
     }
 
     public Message parseString(String tostring){
 
         //Message message = new Message();
-            String [] separated = tostring.split("λ");
+        if (tostring.substring(0,1).equals("λ")){
+            String [] separated = tostring.split("~");
 
             if (separated[0].equals("0")) {
                return new Message(separated[1], separated[2], separated[3], Integer.parseInt(separated[0]));
             }
 
-            else if(separated[0].equals("1")){
-               return new Message(separated[1],separated[2],"",Integer.parseInt(separated[0]));
+           else if(separated[1].equals("1")){
+             return new Message(separated[2],separated[3],"",Integer.parseInt(separated[1]));
             }
             else{
                 return null;
             }
         }
     }
-
-
-
