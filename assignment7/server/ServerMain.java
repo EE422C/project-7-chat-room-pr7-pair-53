@@ -96,9 +96,8 @@ public class ServerMain extends Application
                 while (true) {
                     // Receive radius from the client
                     //String text = inputFromClient.readUTF();
-                    Message message = new Message();
-
-                        message.setBody(inputFromClient.readUTF());
+                    Message message1 = new Message();
+                    message1 = message1.parseString(inputFromClient.readUTF());
 
 
 
@@ -107,26 +106,38 @@ public class ServerMain extends Application
                     //global.Message message = new global.Message();
                     //message.setBody(text);
 
-                    String text=message.getBody();
-                    outputToClient.writeUTF(message.getBody());
+                    String text=message1.getBody();
+                    outputToClient.writeUTF(message1.getBody());
 
 
                     // Compute area
-                    String textback = "SENT to the server at " + message.printTime();
-                    Message message1 = new Message();
-                    message1.setBody(textback);
-                    outputToClient.writeUTF(message1.getBody());
+                    String textback = "SENT to " + message1.getTo() + " at " + message1.printTime();
+
+                    outputToClient.writeUTF(textback);
+
+                    String from = message1.getFrom();
+                    String body = message1.getBody();
 
                     Platform.runLater(() -> {
-                        server.postToServer("CLIENT: " +
-                                text);
-                        server.postToServer(message1.getBody());
+                        server.postToServer(from + ": " +
+                               body);
+                        server.postToServer(textback);
                     });
+
+
+/*
+                    server.postToServer(message1.getFrom() + ": " +
+                            message1.getBody());
+
+*/
                 }
+
             } catch(IOException e) {
                 e.printStackTrace();
             }
+
         }
+
     }
 
     public static void main(String[] args) {

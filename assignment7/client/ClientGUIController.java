@@ -47,10 +47,11 @@ public class ClientGUIController implements Initializable {
 
     public void send(){
 System.out.println("sent");
-displayMessage(send_text.getText());
+//displayMessage(send_text.getText());
+        ClientMain.sendMessage();
 send_text.clear();
     //typingNoteSent=false;
-        ClientMain.sendMessage();
+        //ClientMain.sendMessage();
     }
 
 //    public void typing(){
@@ -64,6 +65,10 @@ send_text.clear();
         return send_text.getText();
     }
 
+    public String getUsername(){
+        return username.getText();
+    }
+
     public void displayMessage(String msg){
         message_window.appendText(msg+"\n");
     }
@@ -74,6 +79,7 @@ send_text.clear();
         ArrayList<Object> data=new ArrayList<Object>();
         data.add(fname.getText());
         data.add(lname.getText());
+        data.add(username.getText());
         String[] DOB=birth.getText().split("/");
         data.add(Integer.parseInt(DOB[2]));
         data.add(Integer.parseInt(DOB[0]));
