@@ -123,21 +123,23 @@ public class ServerMain extends Application
                     String from = message1.getFrom();
                     String body = message1.getBody();
 
+
                     Platform.runLater(() -> {
                         server.postToServer(from + ": " +
                                body);
                         server.postToServer(textback);
                     });
 
+
                     for(HandleAClient cl:clients)
                         cl.broadcastMessageSTR(from + ": " +
                                 body);
 
-/*
+
                     server.postToServer(message1.getFrom() + ": " +
                             message1.getBody());
 
-*/
+
                 }
 
             } catch(IOException e) {
