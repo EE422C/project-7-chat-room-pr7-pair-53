@@ -105,19 +105,23 @@ public class ServerMain extends Application
                     //String text = inputFromClient.readUTF();
                     Message message = new Message();
                     message = message.parseString(inputFromClient.readUTF());
+                    String text = inputFromClient.readUTF();
+                    Message message1 = new Message();
+                    message1 = message1.parseString(text);
+                    //String textinfo = inputFromClient.readUTF();
+
 
 
                     if(message.getMode()==0) {
                         String from = message.getFrom();
                         String body = message.getBody();
 
-                        outputToClient.writeUTF(from+":"+message.getBody());
+                        outputToClient.writeUTF(text);
 
                         // Compute area
                         String textback = "SENT to " + message.getTo() + " at " + message.printTime();
 
                         outputToClient.writeUTF(textback);
-
 
 
                         Platform.runLater(() -> {

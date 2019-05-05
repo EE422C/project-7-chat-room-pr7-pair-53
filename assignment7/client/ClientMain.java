@@ -33,7 +33,7 @@ public class ClientMain extends Application {
 		// Create a scene and place it in the stage
 		loader.setLocation(getClass().getResource("ClientGUI.fxml"));
 		Parent root = loader.load();
-		client =loader.getController();
+		client = loader.getController();
 		primaryStage.setTitle("yMessage");
 		primaryStage.setScene(new Scene(root));
 		primaryStage.show(); // Display the stage
@@ -44,20 +44,34 @@ public class ClientMain extends Application {
 			Socket socket = new Socket("localhost", 8000);
 
 			// Create an input stream to receive data from the server
-			toServer=new DataOutputStream(socket.getOutputStream());
+			toServer = new DataOutputStream(socket.getOutputStream());
 			fromServer = new DataInputStream(socket.getInputStream());
 
 
 
 			// Create an output stream to send data to the server
 			//toServer = new DataOutputStream(socket.getOutputStream());
-		}
-		catch (IOException ex) {
+		} catch (IOException ex) {
 			client.displayMessage(ex.toString());
 		}
-
-
+		Thread thread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while (true) {
+					try {
+						Message message1 = new Message();
+						message1 = message1.parseString(fromServer.readUTF());
+						if (!client.getUsername().equals(message1.getFrom()))
+							client.displayMessage(message1.getFrom() + ": " + message1.getBody());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		thread.start();
 	}
+
 
 	public static void userInit(ArrayList<Object> userData){
 
