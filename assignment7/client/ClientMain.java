@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import global.Message;
 import global.User;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -45,6 +46,8 @@ public class ClientMain extends Application {
 			// Create an input stream to receive data from the server
 			toServer=new DataOutputStream(socket.getOutputStream());
 			fromServer = new DataInputStream(socket.getInputStream());
+
+
 
 			// Create an output stream to send data to the server
 			//toServer = new DataOutputStream(socket.getOutputStream());
@@ -106,7 +109,7 @@ public class ClientMain extends Application {
 	}
 
 	public static void updateUsers(){
-		Message updateMsg = new Message(user.getUsername(),null,chattingWith,3);
+		Message updateMsg = new Message(user.getUsername(),user.getUsername(),chattingWith,3);
 		sendMessage(updateMsg.toInfoString());
 	}
 

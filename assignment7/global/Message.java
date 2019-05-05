@@ -76,7 +76,7 @@ public class Message implements Serializable{
     }
 
     public String toInfoString(){
-        String tostring = "θλ";
+        String tostring = "";
         tostring += adminmode + "λ" + from.getUsername() + "λ" + to.getUsername() + "λ" + body;
         return tostring;
     }
@@ -84,24 +84,20 @@ public class Message implements Serializable{
     public Message parseString(String tostring){
 
         //Message message = new Message();
-        if (tostring.substring(0,1).equals("θ")){
             String [] separated = tostring.split("λ");
 
-            if (separated[1].equals("0")) {
-               return new Message(separated[2], separated[3], separated[4], Integer.parseInt(separated[1]));
+            if (separated[0].equals("0")) {
+               return new Message(separated[1], separated[2], separated[3], Integer.parseInt(separated[0]));
             }
 
-            else if(separated[1].equals("1")){
-               return new Message(separated[2],separated[3],"",Integer.parseInt(separated[1]));
+            else if(separated[0].equals("1")){
+               return new Message(separated[1],separated[2],"",Integer.parseInt(separated[0]));
             }
             else{
                 return null;
             }
         }
-        else{
-            return null;
-        }
     }
-}
+
 
 
