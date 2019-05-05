@@ -42,6 +42,8 @@ public class Message implements Serializable{
         this.to.setUsername(to);
         this.body = body;
         this.adminmode = adminmode;
+        this.time = new Timestamp(System.currentTimeMillis());
+        this.myThread = new Thread();
     }
 
     public void setBody(String body){
@@ -54,6 +56,14 @@ public class Message implements Serializable{
 
     public String getBody(){
         return body;
+    }
+
+    public String getTo(){
+        return to.getUsername();
+    }
+
+    public String getFrom(){
+        return from.getUsername();
     }
 
 
@@ -77,10 +87,16 @@ public class Message implements Serializable{
         if (tostring.substring(0,1).equals("λ")){
             String [] separated = tostring.split("/");
 
+            if (separated[1].equals("0")) {
+               return new Message(separated[2], separated[3], separated[4], Integer.parseInt(separated[1]));
+            }
 
-            Message message = new Message(separated[2], separated[3], separated[4], Integer.parseInt(separated[1]));
-
-            return message;
+            else if(separated[1].equals("1")){
+               return new Message(separated[2],separated[3],"",Integer.parseInt(separated[1]));
+            }
+            else{
+                return null;
+            }
         }
         else{
             return null;

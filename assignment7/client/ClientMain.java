@@ -55,8 +55,8 @@ public class ClientMain extends Application {
 	}
 
 	public static void userInit(ArrayList<Object> userData){
-		user = new global.User((String)userData.get(0), (String)userData.get(1), (int)userData.get(2), (int)userData.get(3),(int)userData.get(4));
-		// user = new global.User((String)userData.get(0), (String)userData.get(1), (int)userData.get(2), (int)userData.get(3),(int)userData.get(4), (int)userData.get(5));
+
+				user = new global.User((String)userData.get(0), (String)userData.get(1), (String)userData.get(2), (int)userData.get(3),(int)userData.get(4), (int)userData.get(5));
 		// user = new global.User();
 		client.displayMessage(user.welcomeMessage().getBody());
 	}
@@ -69,15 +69,14 @@ public class ClientMain extends Application {
 			String text = client.getMessage().trim();
 			//String text = client.send_text.getText();
 
-            Message message = new Message();
-            message.setBody(text);
+            Message message = new Message(client.getUsername(),client.chattingWith,text,0);
 
 
 			// Display to the text area
 			client.displayMessage(user.getUsername()+": " + text);
 
 
-			toServer.writeUTF(message.getBody());
+			toServer.writeUTF(message.toInfoString());
 			toServer.flush();
 
 		}
