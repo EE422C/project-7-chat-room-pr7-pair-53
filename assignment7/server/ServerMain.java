@@ -98,7 +98,7 @@ public class ServerMain extends Application
                     //String text = inputFromClient.readUTF();
                     Message message1 = new Message();
                     message1 = message1.parseString(inputFromClient.readUTF());
-
+                    //String textinfo = inputFromClient.readUTF();
 
 
 
@@ -126,9 +126,6 @@ public class ServerMain extends Application
                     });
 
 
-
-                    server.postToServer(message1.getFrom() + ": " +
-                            message1.getBody());
 
 
                 }

@@ -89,12 +89,7 @@
                         </CustomMenuItem>
                         <CustomMenuItem hideOnClick="false" mnemonicParsing="false" text="Username">
                            <content>
-                              <TextField fx:id="username" promptText="Username" style="-fx-background-color: -fx-text-box-border, -fx-control-inner-background, transparent; -fx-border-color: #FFFFFF;" />
-                           </content>
-                        </CustomMenuItem>
-                        <CustomMenuItem hideOnClick="false" mnemonicParsing="false" text="Birthdate">
-                           <content>
-                              <TextField fx:id="birth" promptText="MM/DD/YYYY" style="-fx-background-color: -fx-text-box-border, -fx-control-inner-background, transparent; -fx-border-color: #FFFFFF;" />
+                              <TextField fx:id="username" onAction="#login" promptText="Username" style="-fx-background-color: -fx-text-box-border, -fx-control-inner-background, transparent; -fx-border-color: #FFFFFF;" />
                            </content>
                         </CustomMenuItem>
                         <MenuItem mnemonicParsing="false" onAction="#login" text="Submit" />
