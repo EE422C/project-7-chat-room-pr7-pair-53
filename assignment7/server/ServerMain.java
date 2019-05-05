@@ -21,23 +21,22 @@ import javafx.stage.Stage;
 public class ServerMain extends Application
 { // Text area for displaying contents
 
-	FXMLLoader loader = new FXMLLoader();
-	ServerGUIController server;
+    FXMLLoader loader = new FXMLLoader();
+    ServerGUIController server;
 
     // Number a client
     private int clientNo = 0;
-    private ArrayList<HandleAClient> clients=new ArrayList<>();
     ArrayList<User> activeUsers=new ArrayList<>();
 
     @Override // Override the start method in the Application class
     public void start(Stage primaryStage) throws Exception {
-				// Create a scene and place it in the stage
-				loader.setLocation(getClass().getResource("ServerGUI.fxml"));
-				Parent root = loader.load();
-				server=loader.getController();
-				primaryStage.setTitle("yMessage Server");
-				primaryStage.setScene(new Scene(root));
-				primaryStage.show(); // Display the stage
+        // Create a scene and place it in the stage
+        loader.setLocation(getClass().getResource("ServerGUI.fxml"));
+        Parent root = loader.load();
+        server=loader.getController();
+        primaryStage.setTitle("yMessage Server");
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show(); // Display the stage
 
         new Thread( () -> {
             try {  // Create a server socket
@@ -70,9 +69,7 @@ public class ServerMain extends Application
 
 
                     // Create and start a new thread for the connection
-                    HandleAClient cl =new HandleAClient(socket);
-                    clients.add(cl);
-                    new Thread(cl).start();
+                    new Thread(new HandleAClient(socket)).start();
                 }
             }
             catch(IOException ex) {
@@ -85,8 +82,6 @@ public class ServerMain extends Application
     // Define the thread class for handling
     class HandleAClient implements Runnable {
         private Socket socket; // A connected socket
-        DataOutputStream outputToClient;
-        DataInputStream inputFromClient;
         /** Construct a thread */
         public HandleAClient(Socket socket) {
             this.socket = socket;
@@ -95,8 +90,8 @@ public class ServerMain extends Application
         public void run() {
             try {
                 // Create data input and output streams
-                outputToClient = new DataOutputStream( socket.getOutputStream());
-                inputFromClient = new DataInputStream( socket.getInputStream());
+                DataOutputStream outputToClient = new DataOutputStream( socket.getOutputStream());
+                DataInputStream inputFromClient = new DataInputStream( socket.getInputStream());
                 // Continuously serve the client
                 while (true) {
                     // Receive radius from the client
@@ -125,18 +120,14 @@ public class ServerMain extends Application
 
                     Platform.runLater(() -> {
                         server.postToServer(from + ": " +
-                               body);
+                                body);
                         server.postToServer(textback);
                     });
 
-                    for(HandleAClient cl:clients)
-                        cl.broadcastMessageSTR(from + ": " +
-                                body);
 
 /*
                     server.postToServer(message1.getFrom() + ": " +
                             message1.getBody());
-
 */
                 }
 
@@ -146,13 +137,8 @@ public class ServerMain extends Application
 
         }
 
-        public void broadcastMessageSTR(String msg){
-            try {
-                outputToClient.writeUTF("fromServ");
-            } catch (Exception e){e.printStackTrace();}
-        }
-
     }
+
 
 
     public static void main(String[] args) {

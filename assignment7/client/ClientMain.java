@@ -104,6 +104,7 @@ public class ClientMain extends Application {
 
                 toServer.writeUTF(message.getBody());
                 toServer.flush();
+				System.out.println("sent from client");
             }
 
 		}

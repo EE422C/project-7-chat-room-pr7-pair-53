@@ -31,7 +31,6 @@ public class ClientGUIController implements Initializable {
     @FXML TextField fname;
     @FXML TextField lname;
     @FXML TextField username;
-    @FXML TextField birth;
     @FXML ListView DMs;
     @FXML ListView room_sel;
 
@@ -50,7 +49,6 @@ public class ClientGUIController implements Initializable {
     }
 
     public void send(){
-System.out.println("sent");
 //displayMessage(send_text.getText());
         ClientMain.sendMessage();
 send_text.clear();
@@ -79,16 +77,12 @@ send_text.clear();
     }
 
     public void login(){
-        if(fname.getText().equals("")||lname.getText().equals("")||birth.getText().equals(""))
+        if(fname.getText().equals("")||lname.getText().equals("")||username.getText().equals(""))
             return;
         ArrayList<Object> data=new ArrayList<Object>();
         data.add(fname.getText());
         data.add(lname.getText());
         data.add(username.getText());
-        String[] DOB=birth.getText().split("/");
-        data.add(Integer.parseInt(DOB[2]));
-        data.add(Integer.parseInt(DOB[0]));
-        data.add(Integer.parseInt(DOB[1]));
         window.setDisable(false);
         userInit(data);
         updateUsers();
