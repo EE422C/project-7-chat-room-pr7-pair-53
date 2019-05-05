@@ -6,10 +6,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Accordion;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
@@ -33,6 +30,7 @@ public class ClientGUIController implements Initializable {
     @FXML TextField username;
     @FXML ListView DMs;
     @FXML ListView room_sel;
+    @FXML Menu login_menu;
 
     String chattingWith="Broadcast";
     Map<String,String> chatHistory=new HashMap<>();
@@ -84,6 +82,7 @@ send_text.clear();
         data.add(lname.getText());
         data.add(username.getText());
         window.setDisable(false);
+        login_menu.hide();
         userInit(data);
         updateUsers();
     }

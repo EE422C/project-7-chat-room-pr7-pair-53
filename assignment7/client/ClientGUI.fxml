@@ -75,7 +75,7 @@
          </HBox>
             <MenuBar prefHeight="20.0" prefWidth="600.0" StackPane.alignment="TOP_CENTER">
               <menus>
-                <Menu mnemonicParsing="false" text="Login">
+                <Menu fx:id="login_menu" mnemonicParsing="false" text="Login">
                   <items>
                         <CustomMenuItem hideOnClick="false" mnemonicParsing="false" text="First Name">
                            <content>

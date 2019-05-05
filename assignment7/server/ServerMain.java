@@ -26,6 +26,7 @@ public class ServerMain extends Application
 
     // Number a client
     private int clientNo = 0;
+    private ArrayList<HandleAClient> clients=new ArrayList<>();
     ArrayList<User> activeUsers=new ArrayList<>();
 
     @Override // Override the start method in the Application class
@@ -69,7 +70,9 @@ public class ServerMain extends Application
 
 
                     // Create and start a new thread for the connection
-                    new Thread(new HandleAClient(socket)).start();
+                    HandleAClient cl = new HandleAClient(socket);
+                    clients.add(cl);
+                    new Thread(cl).start();
                 }
             }
             catch(IOException ex) {
@@ -82,6 +85,8 @@ public class ServerMain extends Application
     // Define the thread class for handling
     class HandleAClient implements Runnable {
         private Socket socket; // A connected socket
+        DataOutputStream outputToClient;
+        DataInputStream inputFromClient;
         /** Construct a thread */
         public HandleAClient(Socket socket) {
             this.socket = socket;
@@ -90,8 +95,8 @@ public class ServerMain extends Application
         public void run() {
             try {
                 // Create data input and output streams
-                DataOutputStream outputToClient = new DataOutputStream( socket.getOutputStream());
-                DataInputStream inputFromClient = new DataInputStream( socket.getInputStream());
+                outputToClient = new DataOutputStream( socket.getOutputStream());
+                inputFromClient = new DataInputStream( socket.getInputStream());
                 // Continuously serve the client
                 while (true) {
                     // Receive radius from the client
@@ -117,8 +122,7 @@ public class ServerMain extends Application
 
                     String from = message1.getFrom();
                     String body = message1.getBody();
-
-
+                    
                     Platform.runLater(() -> {
                         server.postToServer(from + ": " +
                                 body);
