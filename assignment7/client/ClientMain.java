@@ -59,7 +59,7 @@ public class ClientMain extends Application {
 
 	public static void userInit(ArrayList<Object> userData){
 
-				user = new global.User((String)userData.get(0), (String)userData.get(1), (String)userData.get(2), (int)userData.get(3),(int)userData.get(4), (int)userData.get(5));
+				user = new global.User((String)userData.get(0), (String)userData.get(1), (String)userData.get(2));
 		// user = new global.User();
 		client.displayMessage(user.welcomeMessage().getBody());
 	}

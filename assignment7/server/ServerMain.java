@@ -118,6 +118,7 @@ public class ServerMain extends Application
                     String from = message1.getFrom();
                     String body = message1.getBody();
 
+
                     Platform.runLater(() -> {
                         server.postToServer(from + ": " +
                                 body);
@@ -125,10 +126,11 @@ public class ServerMain extends Application
                     });
 
 
-/*
+
                     server.postToServer(message1.getFrom() + ": " +
                             message1.getBody());
-*/
+
+
                 }
 
             } catch(IOException e) {

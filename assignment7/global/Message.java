@@ -98,8 +98,11 @@ public class Message implements Serializable {
             } else {
                 return null;
             }
+        } else {
+            return null;
         }
         else
             return null;
     }
+
 }
