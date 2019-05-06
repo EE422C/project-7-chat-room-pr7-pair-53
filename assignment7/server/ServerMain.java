@@ -107,13 +107,17 @@ public class ServerMain extends Application
                     message = message.parseString(text);
 
 
-
+                    System.out.println(text);
 
                     if(message.getMode()==0) {
                         String from = message.getFrom();
                         String body = message.getBody();
 
-                        outputToClient.writeUTF(text);
+
+
+                        for(HandleAClient cl:clients){
+                            cl.broadcastMessage(message.toInfoString());
+                        }
 
                         // Compute area
                         String textback = "SENT to " + message.getTo() + " at " + message.printTime();
@@ -140,6 +144,12 @@ public class ServerMain extends Application
                 e.printStackTrace();
             }
 
+        }
+
+        public void broadcastMessage(String msg){
+            try {
+                outputToClient.writeUTF(msg);
+            } catch (Exception e) {e.printStackTrace();}
         }
 
         public void updateActiveUsers(Message msg){
