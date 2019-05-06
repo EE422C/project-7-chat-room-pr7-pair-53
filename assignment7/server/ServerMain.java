@@ -3,45 +3,44 @@ package server;/* From Daniel Liang's book */
 
 import java.io.*;
 import java.net.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.Observable;
 
 import global.Message;
 import global.User;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 
-public class ServerMain extends Application
-{ // Text area for displaying contents
+public class ServerMain extends Application { // Text area for displaying contents
 
     FXMLLoader loader = new FXMLLoader();
     ServerGUIController server;
 
     // Number a client
     private int clientNo = 0;
-    private static ArrayList<HandleAClient> clients=new ArrayList<>();
-    Map<String,String> activeUsers=new HashMap<>();
+    private static ArrayList<HandleAClient> clients = new ArrayList<>();
+    Map<String, String> activeUsers = new HashMap<>();
 
     @Override // Override the start method in the Application class
     public void start(Stage primaryStage) throws Exception {
         // Create a scene and place it in the stage
         loader.setLocation(getClass().getResource("ServerGUI.fxml"));
         Parent root = loader.load();
-        server=loader.getController();
+        server = loader.getController();
         primaryStage.setTitle("yMessage Server");
         primaryStage.setScene(new Scene(root));
         primaryStage.show(); // Display the stage
 
-        new Thread( () -> {
+        new Thread(() -> {
             try {  // Create a server socket
                 @SuppressWarnings("resource")
                 ServerSocket serverSocket = new ServerSocket(8000);
@@ -57,7 +56,7 @@ public class ServerMain extends Application
                     clientNo++;
 
 
-                    Platform.runLater( () -> {
+                    Platform.runLater(() -> {
                         // Display the client number
                         server.postToServer("Starting thread for Client " + clientNo +
                                 " at " + new Date());
@@ -76,11 +75,32 @@ public class ServerMain extends Application
                     clients.add(cl);
                     new Thread(cl).start();
                 }
-            }
-            catch(IOException ex) {
+            } catch (IOException ex) {
                 System.err.println(ex);
             }
         }).start();
+        primaryStage.setOnHiding(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run(){
+                        /*
+                        try {
+                            Message updateMsg = new Message(user.getUsername(), "leaving", "", 1);
+                            toServer.writeUTF(updateMsg.toInfoString());
+                            //toServer.flush();
+                            flag = true;
+
+                        }catch(Exception e){e.printStackTrace();}
+                        */
+                        System.out.println("BYE FROM SERVER");
+                        System.exit(0);
+
+                    }
+                });
+            }
+        });
     }
 
 
@@ -89,16 +109,22 @@ public class ServerMain extends Application
         private Socket socket; // A connected socket
         DataOutputStream outputToClient;
         DataInputStream inputFromClient;
-        /** Construct a thread */
+
+        /**
+         * Construct a thread
+         */
         public HandleAClient(Socket socket) {
             this.socket = socket;
         }
-        /** Run a thread */
+
+        /**
+         * Run a thread
+         */
         public void run() {
             try {
                 // Create data input and output streams
-                outputToClient = new DataOutputStream( socket.getOutputStream());
-                inputFromClient = new DataInputStream( socket.getInputStream());
+                outputToClient = new DataOutputStream(socket.getOutputStream());
+                inputFromClient = new DataInputStream(socket.getInputStream());
                 // Continuously serve the client
                 while (true) {
                     // Receive radius from the client
@@ -106,20 +132,17 @@ public class ServerMain extends Application
                     Message message = new Message();
                     message = message.parseString(text);
 
-                    if(message.getMode()==0) {
+                    if (message.getMode() == 0) {
                         String from = message.getFrom();
                         String body = message.getBody();
 
 
-
-                        for(HandleAClient cl:clients){
+                        for (HandleAClient cl : clients) {
                             cl.broadcastMessage(message.toInfoString());
                         }
 
                         // Compute area
                         String textback = "SENT to " + message.getTo() + " at " + message.printTime();
-
-                        // outputToClient.writeUTF(textback);
 
 
                         Platform.runLater(() -> {
@@ -127,41 +150,50 @@ public class ServerMain extends Application
                                     body);
                             server.postToServer(textback);
                         });
-                    }
-                    else if(message.getMode()==1){
+                    } else if (message.getMode() == 1) {
                         updateActiveUsers(message);
+
+                        if (message.getTo().equals("leaving")) {
+                            String msg = message.getFrom() + ": User " + message.getFrom() + " has left the server." ;
+                            Platform.runLater(() -> {
+                                server.postToServer(msg);
+                            });
+                            broadcastMessage(msg);
+                        }
                     }
-
-
 
 
                 }
 
-            } catch(IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
         }
 
-        public void broadcastMessage(String msg){
+        public void broadcastMessage(String msg) {
             try {
                 outputToClient.writeUTF(msg);
-            } catch (Exception e) {e.printStackTrace();}
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
-        public void updateActiveUsers(Message msg){
-            if(msg.getTo().equals("leaving")){
+        public void updateActiveUsers(Message msg) {
+
+            if (msg.getTo().equals("leaving")) {
                 activeUsers.remove(msg.getFrom());
             } else
-                activeUsers.put(msg.getFrom(),msg.getTo());
-            Message userUpdate = new Message("","",activeUsers.toString(),2);
-            for(HandleAClient cl:clients) {
+                activeUsers.put(msg.getFrom(), msg.getTo());
+            Message userUpdate = new Message("", "", activeUsers.toString(), 2);
+            for (HandleAClient cl : clients) {
                 try {
                     cl.broadcastMessage(userUpdate.toInfoString());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+
         }
 
     }
@@ -172,8 +204,8 @@ public class ServerMain extends Application
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
                 System.out.println("In shutdown hook");
-                for(HandleAClient cl:ServerMain.clients){
-                    Message bye=new Message("Server","Broadcast","It's time for this server to nap, goodbye!",1);
+                for (HandleAClient cl : ServerMain.clients) {
+                    Message bye = new Message("Server", "Broadcast", "It's time for this server to nap, goodbye!", 1);
                     cl.broadcastMessage(bye.toInfoString());
                 }
             }
