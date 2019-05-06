@@ -152,7 +152,6 @@ public class ServerMain extends Application
 
         public void updateActiveUsers(Message msg){
 <<<<<<< HEAD
-<<<<<<< HEAD
             if(msg.getTo().trim().equals("leaving")){
                 for(HandleAClient cl:ServerMain.clients){
                     Message bye=new Message("Server","Broadcast",msg.getFrom()+" has left the server.",0);
@@ -171,16 +170,11 @@ public class ServerMain extends Application
                 }
             }
 =======
-=======
->>>>>>> parent of d7a2309... Group messages work
             if(msg.getMode()!=1)
                 return;
             activeUsers.put(msg.getFrom(),msg.getTo());
             System.out.println(msg.toInfoString());
             System.out.println(activeUsers);
-<<<<<<< HEAD
->>>>>>> parent of d7a2309... Group messages work
-=======
 >>>>>>> parent of d7a2309... Group messages work
         }
 
@@ -195,13 +189,10 @@ public class ServerMain extends Application
             public void run() {
                 System.out.println("In shutdown hook");
 <<<<<<< HEAD
-<<<<<<< HEAD
                 for(HandleAClient cl:ServerMain.clients){
                     Message bye=new Message("Server","Broadcast","It's time for this server to nap, goodbye!",0);
                     cl.broadcastMessage(bye.toInfoString());
                 }
-=======
->>>>>>> parent of d7a2309... Group messages work
 =======
 >>>>>>> parent of d7a2309... Group messages work
             }

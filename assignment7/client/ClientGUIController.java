@@ -112,7 +112,6 @@ send_text.clear();
     }
 
 <<<<<<< HEAD
-<<<<<<< HEAD
     public void updateLocalUsers(Map<String,String> m){
         activeUsers=m;
         Set<String> users=activeUsers.keySet();
@@ -125,7 +124,5 @@ send_text.clear();
     public void updateDMUsers(){
         updateUsers();
     }
-=======
->>>>>>> parent of d7a2309... Group messages work
 
 }

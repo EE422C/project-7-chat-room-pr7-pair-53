@@ -127,15 +127,12 @@ public class ClientMain extends Application {
 	public static void sendMessage(String text){
 		try {
 <<<<<<< HEAD
-<<<<<<< HEAD
 			Message updateMsg = new Message(user.getUsername(), chattingWith, "", 1);
 			System.out.println(updateMsg.toInfoString());
 			toServer.writeUTF(updateMsg.toInfoString());
 			toServer.flush();
 		}catch(Exception e){e.printStackTrace();}
 =======
-=======
->>>>>>> parent of d7a2309... Group messages work
 
 			Message message = new Message();
 			message = message.parseString(text);
@@ -156,9 +153,6 @@ public class ClientMain extends Application {
 		catch (IOException ex) {
 			System.err.println(ex);
 		}
-<<<<<<< HEAD
->>>>>>> parent of d7a2309... Group messages work
-=======
 >>>>>>> parent of d7a2309... Group messages work
 	}
 
