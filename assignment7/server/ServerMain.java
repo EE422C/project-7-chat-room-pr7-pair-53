@@ -26,7 +26,7 @@ public class ServerMain extends Application
     FXMLLoader loader = new FXMLLoader();
     ServerGUIController server;
     private int clientNo = 0;
-    private static ArrayList<HandleAClient> clients=new ArrayList<>();
+    private ArrayList<HandleAClient> clients=new ArrayList<>();
     Map<String,String> activeUsers=new HashMap<>();
 
     @Override // Override the start method in the Application class
@@ -104,6 +104,9 @@ public class ServerMain extends Application
                     Message message = new Message();
                     message = message.parseString(text);
 
+
+                    System.out.println(text);
+
                     if(message.getMode()==0) {
                         String from = message.getFrom();
                         String body = message.getBody();
@@ -148,6 +151,7 @@ public class ServerMain extends Application
         }
 
         public void updateActiveUsers(Message msg){
+<<<<<<< HEAD
             if(msg.getTo().trim().equals("leaving")){
                 for(HandleAClient cl:ServerMain.clients){
                     Message bye=new Message("Server","Broadcast",msg.getFrom()+" has left the server.",0);
@@ -165,6 +169,13 @@ public class ServerMain extends Application
                     e.printStackTrace();
                 }
             }
+=======
+            if(msg.getMode()!=1)
+                return;
+            activeUsers.put(msg.getFrom(),msg.getTo());
+            System.out.println(msg.toInfoString());
+            System.out.println(activeUsers);
+>>>>>>> parent of d7a2309... Group messages work
         }
 
     }
@@ -177,10 +188,13 @@ public class ServerMain extends Application
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
                 System.out.println("In shutdown hook");
+<<<<<<< HEAD
                 for(HandleAClient cl:ServerMain.clients){
                     Message bye=new Message("Server","Broadcast","It's time for this server to nap, goodbye!",0);
                     cl.broadcastMessage(bye.toInfoString());
                 }
+=======
+>>>>>>> parent of d7a2309... Group messages work
             }
         }, "Shutdown-thread"));
     }
