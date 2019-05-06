@@ -27,6 +27,9 @@
                                           <ListView fx:id="room_sel" onMouseClicked="#selectRoom" prefHeight="316.0" prefWidth="297.0">
 =======
                                           <ListView fx:id="room_sel" onMouseClicked="#selectRoom" prefHeight="130.0" prefWidth="300.0">
+<<<<<<< HEAD
+>>>>>>> parent of d7a2309... Group messages work
+=======
 >>>>>>> parent of d7a2309... Group messages work
                                              <opaqueInsets>
                                                 <Insets />
