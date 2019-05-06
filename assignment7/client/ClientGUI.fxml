@@ -10,126 +10,94 @@
 <?import javafx.scene.layout.*?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.ClientGUIController">
-   <children>
-      <StackPane prefHeight="429.0" prefWidth="600.0">
-         <children>
-            <HBox fx:id="window" prefHeight="383.0" prefWidth="600.0" StackPane.alignment="BOTTOM_CENTER">
+    <children>
+        <StackPane prefHeight="429.0" prefWidth="600.0">
             <children>
-               <AnchorPane prefHeight="200.0" prefWidth="300.0">
-                  <children>
-                        <TabPane fx:id="chats_sel" layoutY="80.0" prefHeight="349.0" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE">
-                          <tabs>
-                            <Tab text="           Grext            ">
+                <HBox fx:id="window" prefHeight="383.0" prefWidth="600.0" StackPane.alignment="BOTTOM_CENTER">
+                    <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="300.0">
+                            <children>
+                                <TabPane fx:id="chats_sel" layoutY="80.0" prefHeight="349.0" prefWidth="300.0" tabClosingPolicy="UNAVAILABLE">
+                                    <tabs>
+                                        <Tab text="           Grext            ">
                                  <content>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                       <children>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                          <ListView fx:id="room_sel" onMouseClicked="#selectRoom" prefHeight="316.0" prefWidth="297.0">
-=======
-                                          <ListView fx:id="room_sel" onMouseClicked="#selectRoom" prefHeight="130.0" prefWidth="300.0">
->>>>>>> parent of d7a2309... Group messages work
-=======
-=======
->>>>>>> parent of 6ff6265... still only multicast working
-                                          <ListView fx:id="room_sel" onMouseClicked="#selectRoom" prefHeight="130.0" prefWidth="300.0">
-                                             <opaqueInsets>
-                                                <Insets />
-                                             </opaqueInsets>
-                                          </ListView>
-                                          <Label layoutX="10.0" layoutY="140.0" text="Active Users in Current Room:">
-                                             <font>
-                                                <Font name="Helvetica Neue Medium" size="13.0" />
-                                             </font>
-                                          </Label>
-<<<<<<< HEAD
-                                          <ListView fx:id="active_users" disable="true" editable="true" focusTraversable="false" layoutY="156.0" onMouseClicked="#selectRoom" prefHeight="160.0" prefWidth="290.0">
-<<<<<<< HEAD
->>>>>>> parent of 6ff6265... still only multicast working
-=======
->>>>>>> parent of 6ff6265... still only multicast working
-=======
-                                          <ListView fx:id="active_users" editable="true" focusTraversable="false" layoutY="156.0" onMouseClicked="#selectRoom" prefHeight="160.0" prefWidth="290.0">
->>>>>>> parent of 9390755... still just group messaging
-                                             <opaqueInsets>
-                                                <Insets />
-                                             </opaqueInsets>
-                                          </ListView>
-                                       </children>
-                                    </AnchorPane>
+                                                  <ListView fx:id="room_sel" onMouseClicked="#selectRoom" prefHeight="130.0" prefWidth="300.0">
+                                                      <opaqueInsets>
+                                                          <Insets />
+                                                      </opaqueInsets>
+                                                  </ListView>
                                  </content>
-                              </Tab>
-                            <Tab text="    Direct Messages    ">
-                                 <content>
-                                    <ListView fx:id="DMs" onMouseClicked="#selectDM" prefHeight="200.0" prefWidth="200.0" />
-                                 </content>
-                              </Tab>
-                          </tabs>
-                        </TabPane>
-                     <ImageView fitHeight="150.0" fitWidth="50.0" layoutX="11.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@ClientGraphics/logo.png" />
-                        </image>
-                     </ImageView>
-                     <Label layoutX="68.0" layoutY="38.0" prefHeight="38.0" prefWidth="147.0" text="yMessage">
-                        <font>
-                           <Font name="Helvetica Neue Bold" size="30.0" />
-                        </font>
-                     </Label>
-                  </children>
-                  </AnchorPane>
-               <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="300.0">
-                  <children>
-                     <TextArea fx:id="message_window" editable="false" layoutX="1.0" layoutY="29.0" prefHeight="355.0" prefWidth="299.0" wrapText="true" />
-                        <AnchorPane layoutX="-2.0" layoutY="386.0" prefHeight="38.0" prefWidth="297.0">
-                           <children>
-                              <Rectangle arcHeight="35.0" arcWidth="35.0" fill="WHITE" height="34.0" layoutY="2.0" stroke="#8e8e93" strokeType="INSIDE" width="297.0" />
-                           <TextField fx:id="send_text" layoutY="2.0" onAction="#send" prefHeight="34.0" prefWidth="267.0" promptText="yMessage" style="-fx-background-color: transparent;">
-                                 <font>
-                                    <Font name="Helvetica Neue" size="16.0" />
-                                 </font>
-                              </TextField>
-                           <ImageView fx:id="send_button" fitHeight="30.0" fitWidth="43.0" layoutX="264.0" layoutY="4.0" onMouseClicked="#send" onTouchPressed="#send" pickOnBounds="true" preserveRatio="true">
-                              <image>
-                                 <Image url="@ClientGraphics/send_active.png" />
-                              </image>
-                           </ImageView>
-                           </children>
+                                        </Tab>
+                                        <Tab text="    Direct Messages    ">
+                                            <content>
+                                                <ListView fx:id="DMs" onMouseClicked="#selectDM" prefHeight="200.0" prefWidth="200.0" />
+                                            </content>
+                                        </Tab>
+                                    </tabs>
+                                </TabPane>
+                                <ImageView fitHeight="150.0" fitWidth="50.0" layoutX="11.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@ClientGraphics/logo.png" />
+                                    </image>
+                                </ImageView>
+                                <Label layoutX="68.0" layoutY="38.0" prefHeight="38.0" prefWidth="147.0" text="yMessage">
+                                    <font>
+                                        <Font name="Helvetica Neue Bold" size="30.0" />
+                                    </font>
+                                </Label>
+                            </children>
                         </AnchorPane>
-                  </children>
-               </AnchorPane>
+                        <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="300.0">
+                            <children>
+                                <TextArea fx:id="message_window" editable="false" layoutX="1.0" layoutY="29.0" prefHeight="355.0" prefWidth="299.0" wrapText="true" />
+                                <AnchorPane layoutX="-2.0" layoutY="386.0" prefHeight="38.0" prefWidth="297.0">
+                                    <children>
+                                        <Rectangle arcHeight="35.0" arcWidth="35.0" fill="WHITE" height="34.0" layoutY="2.0" stroke="#8e8e93" strokeType="INSIDE" width="297.0" />
+                                        <TextField fx:id="send_text" layoutY="2.0" onAction="#send" prefHeight="34.0" prefWidth="267.0" promptText="yMessage" style="-fx-background-color: transparent;">
+                                            <font>
+                                                <Font name="Helvetica Neue" size="16.0" />
+                                            </font>
+                                        </TextField>
+                                        <ImageView fx:id="send_button" fitHeight="30.0" fitWidth="43.0" layoutX="264.0" layoutY="4.0" onMouseClicked="#send" onTouchPressed="#send" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@ClientGraphics/send_active.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </HBox>
+                <MenuBar prefHeight="20.0" prefWidth="600.0" StackPane.alignment="TOP_CENTER">
+                    <menus>
+                        <Menu fx:id="login_menu" mnemonicParsing="false" text="Login">
+                            <items>
+                                <CustomMenuItem hideOnClick="false" mnemonicParsing="false" text="First Name">
+                                    <content>
+                                        <TextField fx:id="fname" promptText="First Name" style="-fx-background-color: -fx-text-box-border, -fx-control-inner-background, transparent; -fx-border-color: #FFFFFF;" />
+                                    </content>
+                                </CustomMenuItem>
+                                <CustomMenuItem hideOnClick="false" mnemonicParsing="false" text="Last Name">
+                                    <content>
+                                        <TextField fx:id="lname" promptText="Last Name" style="-fx-background-color: -fx-text-box-border, -fx-control-inner-background, transparent; -fx-border-color: #FFFFFF;" />
+                                    </content>
+                                </CustomMenuItem>
+                                <CustomMenuItem hideOnClick="false" mnemonicParsing="false" text="Username">
+                                    <content>
+                                        <TextField fx:id="username" onAction="#login" promptText="Username" style="-fx-background-color: -fx-text-box-border, -fx-control-inner-background, transparent; -fx-border-color: #FFFFFF;" />
+                                    </content>
+                                </CustomMenuItem>
+                                <MenuItem mnemonicParsing="false" onAction="#login" text="Submit" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
             </children>
-         </HBox>
-            <MenuBar prefHeight="20.0" prefWidth="600.0" StackPane.alignment="TOP_CENTER">
-              <menus>
-                <Menu fx:id="login_menu" mnemonicParsing="false" text="Login">
-                  <items>
-                        <CustomMenuItem hideOnClick="false" mnemonicParsing="false" text="First Name">
-                           <content>
-                              <TextField fx:id="fname" promptText="First Name" style="-fx-background-color: -fx-text-box-border, -fx-control-inner-background, transparent; -fx-border-color: #FFFFFF;" />
-                           </content>
-                        </CustomMenuItem>
-                        <CustomMenuItem hideOnClick="false" mnemonicParsing="false" text="Last Name">
-                           <content>
-                              <TextField fx:id="lname" promptText="Last Name" style="-fx-background-color: -fx-text-box-border, -fx-control-inner-background, transparent; -fx-border-color: #FFFFFF;" />
-                           </content>
-                        </CustomMenuItem>
-                        <CustomMenuItem hideOnClick="false" mnemonicParsing="false" text="Username">
-                           <content>
-                              <TextField fx:id="username" onAction="#login" promptText="Username" style="-fx-background-color: -fx-text-box-border, -fx-control-inner-background, transparent; -fx-border-color: #FFFFFF;" />
-                           </content>
-                        </CustomMenuItem>
-                        <MenuItem mnemonicParsing="false" onAction="#login" text="Submit" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
-         </children>
-      </StackPane>
-   </children>
-   <stylesheets>
-      <URL value="@ClientGUIStyles.css" />
-      <URL value="@ClientGUIStyles.css" />
-   </stylesheets>
+        </StackPane>
+    </children>
+    <stylesheets>
+        <URL value="@ClientGUIStyles.css" />
+        <URL value="@ClientGUIStyles.css" />
+    </stylesheets>
 </Pane>
