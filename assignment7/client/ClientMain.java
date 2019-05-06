@@ -79,7 +79,15 @@ public class ClientMain extends Application {
 
 				user = new global.User((String)userData.get(0), (String)userData.get(1), (String)userData.get(2));
 		// user = new global.User();
-		client.displayMessage(user.welcomeMessage().getBody());
+		try {
+			Message welcome;
+			welcome = user.welcomeMessage();
+			welcome.setTo(client.chattingWith);
+			welcome.setFrom(client.getUsername());
+		toServer.writeUTF(welcome.toInfoString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void sendMessage(){
