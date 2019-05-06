@@ -84,6 +84,9 @@ public class Message implements Serializable {
         } else
         if (separated[1].equals("0")) {
             return new Message(separated[2], separated[3], separated[4], Integer.parseInt(separated[1]));
+        }else
+        if (separated[1].equals("2")) {
+            return new Message("", "", separated[4], Integer.parseInt(separated[1]));
         }else {
                 return null;
             }

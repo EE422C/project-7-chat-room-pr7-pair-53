@@ -4,6 +4,9 @@ package client;
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import global.Message;
 import global.User;
@@ -22,6 +25,7 @@ public class ClientMain extends Application {
 	static DataInputStream fromServer = null;
 	static public User user;
 	static String chattingWith="Broadcast";
+	Map<String,String> activeUsers=new HashMap<>();
 
 	FXMLLoader loader = new FXMLLoader();
 	static ClientGUIController client;
@@ -61,10 +65,25 @@ public class ClientMain extends Application {
 					try {
 						Message message1 = new Message();
 						message1 = message1.parseString(fromServer.readUTF());
-						String username = client.getUsername();
-						String chat = client.chattingWith;
-						if (message1!=null && (client.getUsername().equals(message1.getFrom()) || client.chattingWith.equals(message1.getTo())))
-							client.displayMessage(message1.getFrom() + ": " + message1.getBody());
+						if (message1!=null){
+							if(message1.getMode()==0) {
+								if (client.getUsername().equals(message1.getFrom()) || client.chattingWith.equals(message1.getTo())) {
+									client.displayMessage(message1.getFrom() + ": " + message1.getBody());
+								} else if (activeUsers.get(message1.getTo()).equals(chattingWith) && !activeUsers.containsKey(message1.getTo())) {
+									client.displayMessage(message1.getFrom() + ": " + message1.getBody());
+								} else if(message1.getFrom()=="Server")
+									client.displayMessage(message1.getFrom() + ": " + message1.getBody());
+							}
+							else if(message1.getMode()==2){
+								String toMap=message1.getBody();
+								toMap=toMap.substring(1,toMap.length()-1);
+								String[] toMapPT2=toMap.split(",");
+								for(String s:toMapPT2) {
+									activeUsers.put(s.split("=")[0],s.split("=")[1]);
+								}
+								updateLocalUsers();
+							}
+						}
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
@@ -73,7 +92,6 @@ public class ClientMain extends Application {
 		});
 		thread.start();
 	}
-
 
 	public static void userInit(ArrayList<Object> userData){
 
@@ -124,42 +142,18 @@ public class ClientMain extends Application {
 		}
 	}
 
-	public static void sendMessage(String text){
+
+	public static void updateUsers(){
 		try {
-<<<<<<< HEAD
 			Message updateMsg = new Message(user.getUsername(), chattingWith, "", 1);
 			System.out.println(updateMsg.toInfoString());
 			toServer.writeUTF(updateMsg.toInfoString());
 			toServer.flush();
 		}catch(Exception e){e.printStackTrace();}
-=======
-
-			Message message = new Message();
-			message = message.parseString(text);
-
-
-			// Display to the text area
-            if (message.getMode()==0 && !text.equals("")) {
-
-               // client.displayMessage(user.getUsername() + ": " + text);
-
-
-                toServer.writeUTF(message.toInfoString());
-                toServer.flush();
-				System.out.println("sent from client");
-            }
-
-		}
-		catch (IOException ex) {
-			System.err.println(ex);
-		}
->>>>>>> parent of d7a2309... Group messages work
 	}
 
-	public static void updateUsers(){
-		Message updateMsg = new Message(user.getUsername(),chattingWith, "",1);
-		System.out.println(updateMsg.toInfoString());
-		sendMessage(updateMsg.toInfoString());
+	public void updateLocalUsers(){
+		client.updateLocalUsers(activeUsers);
 	}
 
 	public static void updateChattingWith(String s){chattingWith=s;}

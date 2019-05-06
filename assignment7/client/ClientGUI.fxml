@@ -23,11 +23,7 @@
                                  <content>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                        <children>
-<<<<<<< HEAD
                                           <ListView fx:id="room_sel" onMouseClicked="#selectRoom" prefHeight="316.0" prefWidth="297.0">
-=======
-                                          <ListView fx:id="room_sel" onMouseClicked="#selectRoom" prefHeight="130.0" prefWidth="300.0">
->>>>>>> parent of d7a2309... Group messages work
                                              <opaqueInsets>
                                                 <Insets />
                                              </opaqueInsets>
