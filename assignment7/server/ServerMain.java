@@ -79,28 +79,6 @@ public class ServerMain extends Application { // Text area for displaying conten
                 System.err.println(ex);
             }
         }).start();
-        primaryStage.setOnHiding(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run(){
-                        /*
-                        try {
-                            Message updateMsg = new Message(user.getUsername(), "leaving", "", 1);
-                            toServer.writeUTF(updateMsg.toInfoString());
-                            //toServer.flush();
-                            flag = true;
-
-                        }catch(Exception e){e.printStackTrace();}
-                        */
-                        System.out.println("BYE FROM SERVER");
-                        System.exit(0);
-
-                    }
-                });
-            }
-        });
     }
 
 
@@ -201,14 +179,5 @@ public class ServerMain extends Application { // Text area for displaying conten
 
     public static void main(String[] args) {
         launch(args);
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-            public void run() {
-                System.out.println("In shutdown hook");
-                for (HandleAClient cl : ServerMain.clients) {
-                    Message bye = new Message("Server", "Broadcast", "It's time for this server to nap, goodbye!", 1);
-                    cl.broadcastMessage(bye.toInfoString());
-                }
-            }
-        }, "Shutdown-thread"));
     }
 }
