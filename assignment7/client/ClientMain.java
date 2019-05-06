@@ -35,6 +35,22 @@ public class ClientMain extends Application {
 	FXMLLoader loader = new FXMLLoader();
 	static ClientGUIController client;
 
+	public static void updateHost(String host){
+		try {
+			// Create a socket to connect to the server
+			@SuppressWarnings("resource")
+			Socket socket2 = new Socket(host, 8000);
+
+			// Create an input stream to receive data from the server
+			toServer = new DataOutputStream(socket2.getOutputStream());
+			fromServer = new DataInputStream(socket2.getInputStream());
+
+			// Create an output stream to send data to the server
+			//toServer = new DataOutputStream(socket.getOutputStream());
+		} catch (IOException ex) {
+			client.displayMessage(ex.toString());
+		}
+	}
 
 	@Override // Override the start method in the Application class
 	public void start(Stage primaryStage) throws Exception {
@@ -48,37 +64,28 @@ public class ClientMain extends Application {
 		primaryStage.show(); // Display the stage
 		client.setRooms(chatRooms);
 
-		try {
-			// Create a socket to connect to the server
-			@SuppressWarnings("resource")
-			Socket socket = new Socket("localhost", 8000);
+		//updateHost("localhost");
 
-			// Create an input stream to receive data from the server
-			toServer = new DataOutputStream(socket.getOutputStream());
-			fromServer = new DataInputStream(socket.getInputStream());
-
-
-
-			// Create an output stream to send data to the server
-			//toServer = new DataOutputStream(socket.getOutputStream());
-		} catch (IOException ex) {
-			client.displayMessage(ex.toString());
-		}
 		Thread usrUpdate=new Thread(new Runnable() {
 			@Override
 			public void run() {
-				try {
-					updateUsers();
-					Thread.sleep(1000);
-				}catch(Exception e){
-					System.out.println("");
+				if(fromServer!=null&&toServer!=null) {
+					try {
+						updateUsers();
+						Thread.sleep(1000);
+					} catch (Exception e) {
+						System.out.println("");
+					}
 				}
+
 			}
 		});
 		Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				while (true) {
+					System.out.println("from:"+(fromServer==null));
+					System.out.println("to:"+(toServer==null));
 					try {
 						Message msg = new Message();
 						msg = msg.parseString(fromServer.readUTF());
@@ -169,6 +176,10 @@ System.out.println(msg.toInfoString());
 	}
 
 	public static void userInit(ArrayList<Object> userData){
+
+		updateHost(client.getHost());
+		System.out.println("from:"+(fromServer==null));
+		System.out.println("to:"+(toServer==null));
 
 		user = new global.User((String)userData.get(0), (String)userData.get(1), (String)userData.get(2));
 		// user = new global.User();

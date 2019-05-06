@@ -29,6 +29,7 @@ public class ClientGUIController implements Initializable {
     @FXML TextField fname;
     @FXML TextField lname;
     @FXML TextField username;
+    @FXML TextField host;
     @FXML ListView DMs;
     @FXML ListView room_sel;
     @FXML Menu login_menu;
@@ -52,11 +53,9 @@ public class ClientGUIController implements Initializable {
         sendMessage();
     }
 
-//    public void typing(){
-//        if(!typingNoteSent)
-//            displayMessage("user is typing");
-//        typingNoteSent=true;
-//    }
+public String getHost(){
+        return host.getText();
+}
 
     public void setRooms(ArrayList<String> rooms){
         room_sel.setItems(FXCollections.observableArrayList(rooms));
