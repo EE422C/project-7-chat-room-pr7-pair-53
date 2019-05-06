@@ -102,13 +102,10 @@ public class ServerMain extends Application
                 // Continuously serve the client
                 while (true) {
                     // Receive radius from the client
-                    //String text = inputFromClient.readUTF();
-                    Message message = new Message();
-                    message = message.parseString(inputFromClient.readUTF());
                     String text = inputFromClient.readUTF();
-                    Message message1 = new Message();
-                    message1 = message1.parseString(text);
-                    //String textinfo = inputFromClient.readUTF();
+                    Message message = new Message();
+                    message = message.parseString(text);
+
 
 
 
@@ -121,7 +118,7 @@ public class ServerMain extends Application
                         // Compute area
                         String textback = "SENT to " + message.getTo() + " at " + message.printTime();
 
-                        outputToClient.writeUTF(textback);
+                       // outputToClient.writeUTF(textback);
 
 
                         Platform.runLater(() -> {

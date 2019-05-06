@@ -61,7 +61,9 @@ public class ClientMain extends Application {
 					try {
 						Message message1 = new Message();
 						message1 = message1.parseString(fromServer.readUTF());
-						if (!client.getUsername().equals(message1.getFrom()))
+						String username = client.getUsername();
+						String chat = client.chattingWith;
+						if (message1!=null && (client.getUsername().equals(message1.getFrom()) || client.chattingWith.equals(message1.getTo())))
 							client.displayMessage(message1.getFrom() + ": " + message1.getBody());
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -90,7 +92,7 @@ public class ClientMain extends Application {
 
             Message message = new Message(client.getUsername(),client.chattingWith,text,0);
 
-
+			/*
 			// Display to the text area
             if (message.getMode()==0 && !text.equals("")) {
                 client.displayMessage(user.getUsername() + ": " + text);
@@ -99,6 +101,13 @@ public class ClientMain extends Application {
                 toServer.writeUTF(message.toInfoString());
                 toServer.flush();
             }
+
+*/
+			if (message.getMode()==0 && !text.equals("")) {
+				toServer.writeUTF(message.toInfoString());
+				toServer.flush();
+			}
+
 
 		}
 		catch (IOException ex) {
@@ -115,10 +124,11 @@ public class ClientMain extends Application {
 
 			// Display to the text area
             if (message.getMode()==0 && !text.equals("")) {
-                client.displayMessage(user.getUsername() + ": " + text);
+
+               // client.displayMessage(user.getUsername() + ": " + text);
 
 
-                toServer.writeUTF(message.getBody());
+                toServer.writeUTF(message.toInfoString());
                 toServer.flush();
 				System.out.println("sent from client");
             }
