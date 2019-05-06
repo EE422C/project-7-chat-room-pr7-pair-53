@@ -1,3 +1,19 @@
+/*
+ * CHATROOM ClientMain.java
+ * EE422C Project 7 submission by
+ * Guy Sexton
+ * gwm639
+ * 16190
+ * Dylan Wolford
+ * ddw2379
+ * 16190
+ * Slip days used: 0
+ * Spring 2019
+ */
+
+
+
+
 package client;
 /* From Daniel Liang's book */
 
