@@ -25,7 +25,7 @@ public class ClientMain extends Application {
 	static DataInputStream fromServer = null;
 	static public User user;
 	static String chattingWith="Broadcast";
-	Map<String,String> activeUsers=new HashMap<>();
+	ArrayList<String> activeUsers=new ArrayList<>();
 
 	FXMLLoader loader = new FXMLLoader();
 	static ClientGUIController client;
@@ -70,19 +70,28 @@ System.out.println(message1.toInfoString());
 							if(message1.getMode()==0) {
 								if (client.getUsername().equals(message1.getFrom()) || client.chattingWith.equals(message1.getTo())) {
 									client.displayMessage(message1.getFrom() + ": " + message1.getBody());
-								} else if (activeUsers.get(message1.getTo()).equals(chattingWith) && !activeUsers.containsKey(message1.getTo())) {
+								} else if (message1.getTo().equals(chattingWith)) {
 									client.displayMessage(message1.getFrom() + ": " + message1.getBody());
 								} else if(message1.getFrom()=="Server")
 									client.displayMessage(message1.getFrom() + ": " + message1.getBody());
 							}
 							else if(message1.getMode()==2){
+System.out.println(message1.getBody());
 								String toMap=message1.getBody();
 								toMap=toMap.substring(1,toMap.length()-1);
 								String[] toMapPT2=toMap.split(",");
+								ArrayList<String> userUP=new ArrayList<>();
 								for(String s:toMapPT2) {
-									activeUsers.put(s.split("=")[0],s.split("=")[1]);
+										userUP.add(s.split("=")[0].trim());
 								}
-								updateLocalUsers();
+								//activeUsers.clear();
+								activeUsers=userUP;
+								Platform.runLater(new Runnable() {
+									@Override
+									public void run() {
+										updateLocalUsers();
+									}
+									});
 							}
 						}
 					} catch (IOException e) {

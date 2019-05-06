@@ -35,7 +35,6 @@ public class ClientGUIController implements Initializable {
 
     String chattingWith="Broadcast";
     Map<String,String> chatHistory=new HashMap<>();
-    Map<String,String> activeUsers=new HashMap<>();
 
     //boolean typingNoteSent=false;
 
@@ -110,11 +109,9 @@ public class ClientGUIController implements Initializable {
         updateUsers();
     }
 
-    public void updateLocalUsers(Map<String,String> m){
-        activeUsers=m;
-        Set<String> users=activeUsers.keySet();
-        DMs.setItems(FXCollections.observableArrayList(users));
-
+    public void updateLocalUsers(List<String> users){
+        DMs.getItems().clear();
+        DMs.getItems().addAll(users);
     }
 
 }
