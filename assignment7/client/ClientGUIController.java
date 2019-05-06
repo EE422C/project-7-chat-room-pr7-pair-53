@@ -41,7 +41,6 @@ public class ClientGUIController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         window.setDisable(true);
-        room_sel.setItems(FXCollections.observableArrayList("Broadcast","One Room","Two Room","Red Room","Blue Room"));
     }
 
     public void send(){
@@ -59,6 +58,9 @@ public class ClientGUIController implements Initializable {
 //        typingNoteSent=true;
 //    }
 
+    public void setRooms(ArrayList<String> rooms){
+        room_sel.setItems(FXCollections.observableArrayList(rooms));
+    }
 
     public String getMessage(){
         return send_text.getText();
@@ -70,6 +72,14 @@ public class ClientGUIController implements Initializable {
 
     public void displayMessage(String msg){
         message_window.appendText(msg+"\n");
+    }
+    public void displayBackground(String to,String msg){
+        String brd="";
+        for(String k:chatHistory.keySet())
+            if(k.equals(to))
+                brd=chatHistory.get(k);
+        brd=brd+(msg+"\n");
+        chatHistory.put(to,brd);
     }
 
     public void login(){
