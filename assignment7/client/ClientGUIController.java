@@ -117,12 +117,17 @@ send_text.clear();
         DMs.setItems(FXCollections.observableArrayList(users));
         ArrayList<String> userList=new ArrayList<>();
         for(String usr:activeUsers.keySet()){
+            System.out.println(activeUsers.get(usr));
             if(activeUsers.get(usr)==chattingWith)
                 userList.add(usr);
         }
         System.out.println(userList);
         active_users.setItems(FXCollections.observableArrayList(users));
 
+    }
+
+    public void updateDMUsers(){
+        updateUsers();
     }
 
 }

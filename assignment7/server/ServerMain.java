@@ -148,14 +148,19 @@ public class ServerMain extends Application
         }
 
         public void updateActiveUsers(Message msg){
-            if(msg.getTo().equals("leaving")){
-                activeUsers.remove(msg.getFrom());
+            if(msg.getTo().trim().equals("leaving")){
+                for(HandleAClient cl:ServerMain.clients){
+                    Message bye=new Message("Server","Broadcast",msg.getFrom()+" has left the server.",0);
+                    cl.broadcastMessage(bye.toInfoString());
+                    System.out.println(bye.toInfoString());
+                }
+                activeUsers.remove(msg.getFrom().trim());
             } else
-                activeUsers.put(msg.getFrom(),msg.getTo());
+                activeUsers.put(msg.getFrom().trim(),msg.getTo().trim());
             Message userUpdate = new Message("","",activeUsers.toString(),2);
             for(HandleAClient cl:clients) {
                 try {
-                    outputToClient.writeUTF(userUpdate.toInfoString());
+                    cl.broadcastMessage(userUpdate.toInfoString());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -173,7 +178,7 @@ public class ServerMain extends Application
             public void run() {
                 System.out.println("In shutdown hook");
                 for(HandleAClient cl:ServerMain.clients){
-                    Message bye=new Message("Server","Broadcast","It's time for this server to nap, goodbye!",1);
+                    Message bye=new Message("Server","Broadcast","It's time for this server to nap, goodbye!",0);
                     cl.broadcastMessage(bye.toInfoString());
                 }
             }

@@ -102,6 +102,7 @@ public class ClientMain extends Application {
 			welcome = user.welcomeMessage();
 			welcome.setTo(client.chattingWith);
 			welcome.setFrom(client.getUsername());
+			updateUsers();
 		toServer.writeUTF(welcome.toInfoString());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -145,6 +146,7 @@ public class ClientMain extends Application {
 	public static void updateUsers(){
 		try {
 			Message updateMsg = new Message(user.getUsername(), chattingWith, "", 1);
+			System.out.println(updateMsg.toInfoString());
 			toServer.writeUTF(updateMsg.toInfoString());
 			toServer.flush();
 		}catch(Exception e){e.printStackTrace();}
@@ -161,6 +163,11 @@ public class ClientMain extends Application {
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 			public void run() {
 				System.out.println("In shutdown hook");
+				try {
+					Message updateMsg = new Message(user.getUsername(), "leaving", "", 1);
+					toServer.writeUTF(updateMsg.toInfoString());
+					toServer.flush();
+				}catch(Exception e){e.printStackTrace();}
 			}
 		}, "Shutdown-thread"));
 	}
