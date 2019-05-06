@@ -11,8 +11,8 @@ import java.io.ObjectOutputStream;
 
 public class Message implements Serializable {
 
-    private User from;
-    private User to;
+    private String from;
+    private String to;
     private String body;
     private int adminmode;
     transient private Thread myThread;
@@ -25,7 +25,7 @@ public class Message implements Serializable {
         this.myThread = new Thread();
     }
 
-    public Message(User from, User to, String body, int adminmode) {
+    public Message(String from, String to, String body, int adminmode) {
         this.from = from;
         this.to = to;
         this.body = body;
@@ -35,16 +35,6 @@ public class Message implements Serializable {
 
     }
 
-    public Message(String from, String to, String body, int adminmode) {
-        this.from = new User();
-        this.to = new User();
-        this.from.setUsername(from);
-        this.to.setUsername(to);
-        this.body = body;
-        this.adminmode = adminmode;
-        this.time = new Timestamp(System.currentTimeMillis());
-        this.myThread = new Thread();
-    }
 
     public void setBody(String body) {
         this.body = body;
@@ -59,7 +49,15 @@ public class Message implements Serializable {
     }
 
     public String getTo() {
-        return to.getUsername();
+        return to;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
     }
 
     public int getMode() {
@@ -67,7 +65,7 @@ public class Message implements Serializable {
     }
 
     public String getFrom() {
-        return from.getUsername();
+        return from;
     }
 
 
@@ -81,7 +79,7 @@ public class Message implements Serializable {
 
     public String toInfoString() {
         String tostring = "λ";
-        tostring += "~" + adminmode + "~" + from.getUsername() + "~" + to.getUsername() + "~" + body;
+        tostring += "~" + adminmode + "~" + from + "~" + to + "~" + body;
         return tostring;
     }
 
