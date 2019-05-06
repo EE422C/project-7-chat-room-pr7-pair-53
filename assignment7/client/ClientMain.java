@@ -12,11 +12,13 @@ import global.Message;
 import global.User;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 
 public class ClientMain extends Application {
@@ -101,6 +103,41 @@ System.out.println(message1.getBody());
 			}
 		});
 		thread.start();
+
+
+
+		primaryStage.setOnHiding(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        boolean flag = false;
+                        try {
+                            Message updateMsg = new Message(user.getUsername(), "leaving", "", 1);
+                            toServer.writeUTF(updateMsg.toInfoString());
+                            toServer.flush();
+
+                            Message message1 = new Message();
+                            message1 = message1.parseString(fromServer.readUTF());
+
+                            if(message1.getFrom()=="Server")
+                                client.displayMessage(message1.getFrom() + ": " + message1.getBody());
+
+                            flag = true;
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        if (flag) {
+                            System.out.println("BYE FROM CLIENT");
+                            System.exit(0);
+
+                        }
+                    }
+                });
+            }
+        });
 	}
 
 	public static void userInit(ArrayList<Object> userData){
@@ -163,16 +200,19 @@ System.out.println(message1.getBody());
 
 	public static void updateChattingWith(String s){chattingWith=s;}
 
+
 	public static void main(String[] args) {
 		launch(args);
 		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
 			public void run() {
 				System.out.println("In shutdown hook");
+
 				try {
 					Message updateMsg = new Message(user.getUsername(), "leaving", "", 1);
 					toServer.writeUTF(updateMsg.toInfoString());
 					toServer.flush();
 				}catch(Exception e){e.printStackTrace();}
+
 			}
 		}, "Shutdown-thread"));
 	}
