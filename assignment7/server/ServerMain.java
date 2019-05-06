@@ -152,6 +152,7 @@ public class ServerMain extends Application
 
         public void updateActiveUsers(Message msg){
 <<<<<<< HEAD
+<<<<<<< HEAD
             if(msg.getTo().trim().equals("leaving")){
                 for(HandleAClient cl:ServerMain.clients){
                     Message bye=new Message("Server","Broadcast",msg.getFrom()+" has left the server.",0);
@@ -159,12 +160,16 @@ public class ServerMain extends Application
                     System.out.println(bye.toInfoString());
                 }
                 activeUsers.remove(msg.getFrom().trim());
+=======
+            if(msg.getTo().equals("leaving")){
+                activeUsers.remove(msg.getFrom());
+>>>>>>> parent of 9390755... still just group messaging
             } else
-                activeUsers.put(msg.getFrom().trim(),msg.getTo().trim());
+                activeUsers.put(msg.getFrom(),msg.getTo());
             Message userUpdate = new Message("","",activeUsers.toString(),2);
             for(HandleAClient cl:clients) {
                 try {
-                    cl.broadcastMessage(userUpdate.toInfoString());
+                    outputToClient.writeUTF(userUpdate.toInfoString());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -190,7 +195,7 @@ public class ServerMain extends Application
                 System.out.println("In shutdown hook");
 <<<<<<< HEAD
                 for(HandleAClient cl:ServerMain.clients){
-                    Message bye=new Message("Server","Broadcast","It's time for this server to nap, goodbye!",0);
+                    Message bye=new Message("Server","Broadcast","It's time for this server to nap, goodbye!",1);
                     cl.broadcastMessage(bye.toInfoString());
                 }
 =======

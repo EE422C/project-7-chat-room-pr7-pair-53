@@ -119,7 +119,6 @@ send_text.clear();
         DMs.setItems(FXCollections.observableArrayList(users));
         ArrayList<String> userList=new ArrayList<>();
         for(String usr:activeUsers.keySet()){
-            System.out.println(activeUsers.get(usr));
             if(activeUsers.get(usr)==chattingWith)
                 userList.add(usr);
         }
@@ -129,9 +128,5 @@ send_text.clear();
     }
 =======
 >>>>>>> parent of d7a2309... Group messages work
-
-    public void updateDMUsers(){
-        updateUsers();
-    }
 
 }
