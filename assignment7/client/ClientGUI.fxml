@@ -25,11 +25,14 @@
                                        <children>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                                           <ListView fx:id="room_sel" onMouseClicked="#selectRoom" prefHeight="316.0" prefWidth="297.0">
 =======
                                           <ListView fx:id="room_sel" onMouseClicked="#selectRoom" prefHeight="130.0" prefWidth="300.0">
 >>>>>>> parent of d7a2309... Group messages work
 =======
+=======
+>>>>>>> parent of 6ff6265... still only multicast working
                                           <ListView fx:id="room_sel" onMouseClicked="#selectRoom" prefHeight="130.0" prefWidth="300.0">
                                              <opaqueInsets>
                                                 <Insets />
@@ -41,6 +44,9 @@
                                              </font>
                                           </Label>
                                           <ListView fx:id="active_users" disable="true" editable="true" focusTraversable="false" layoutY="156.0" onMouseClicked="#selectRoom" prefHeight="160.0" prefWidth="290.0">
+<<<<<<< HEAD
+>>>>>>> parent of 6ff6265... still only multicast working
+=======
 >>>>>>> parent of 6ff6265... still only multicast working
                                              <opaqueInsets>
                                                 <Insets />
