@@ -149,6 +149,7 @@ public class ClientMain extends Application {
 
 	public static void updateUsers(){
 		Message updateMsg = new Message(user.getUsername(),chattingWith, "",1);
+		System.out.println(updateMsg.toInfoString());
 		sendMessage(updateMsg.toInfoString());
 	}
 
