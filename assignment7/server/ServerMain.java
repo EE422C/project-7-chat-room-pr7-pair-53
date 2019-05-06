@@ -1,4 +1,20 @@
-package server;/* From Daniel Liang's book */
+/*
+ * CHATROOM ServerMain.java
+ * EE422C Project 7 submission by
+ * Guy Sexton
+ * gwm639
+ * 16190
+ * Dylan Wolford
+ * ddw2379
+ * 16190
+ * Slip days used: 0
+ * Spring 2019
+ */
+
+
+
+
+package server;
 
 
 import java.io.*;
@@ -44,6 +60,7 @@ public class ServerMain extends Application { // Text area for displaying conten
             try {  // Create a server socket
                 @SuppressWarnings("resource")
                 ServerSocket serverSocket = new ServerSocket(8000);
+                System.out.println(InetAddress.getLocalHost().getHostAddress());
                 server.postToServer("MultiThreadServer started at "
                         + new Date());
 
