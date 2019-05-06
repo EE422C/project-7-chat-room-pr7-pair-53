@@ -11,7 +11,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
-import java.security.Key;
 import java.util.*;
 
 import static client.ClientMain.*;
@@ -41,8 +40,10 @@ public class ClientGUIController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        window.setDisable(true);
+        //window.setDisable(true);
         room_sel.setItems(FXCollections.observableArrayList("Broadcast","One Room","Two Room","Red Room","Blue Room"));
+        ObservableList<String> users= FXCollections.observableArrayList("Guy","Dylan","Chad","Brad");
+        DMs.setItems(users);
     }
 
     public void send(){
@@ -110,12 +111,15 @@ send_text.clear();
         updateUsers();
     }
 
+<<<<<<< HEAD
     public void updateLocalUsers(Map<String,String> m){
         activeUsers=m;
         Set<String> users=activeUsers.keySet();
         DMs.setItems(FXCollections.observableArrayList(users));
 
     }
+=======
+>>>>>>> parent of d7a2309... Group messages work
 
     public void updateDMUsers(){
         updateUsers();
