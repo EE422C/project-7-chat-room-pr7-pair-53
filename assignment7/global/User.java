@@ -28,6 +28,11 @@ public class User implements Serializable {
     }
 
 
+
+    public String fullName(){
+        return firstname + " " + lastname;
+    }
+
     public String getUsername(){
         return username;
     }
@@ -43,6 +48,7 @@ public class User implements Serializable {
             String body = "User " + getUsername() + " has joined the server.";
             Message admin = new Message();
             admin.setBody(body);
+            //admin.setFrom(getUsername());
             admin.setMode(0);
             return admin;
         }

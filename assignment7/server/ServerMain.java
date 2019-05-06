@@ -25,6 +25,8 @@ public class ServerMain extends Application
 
     FXMLLoader loader = new FXMLLoader();
     ServerGUIController server;
+
+    // Number a client
     private int clientNo = 0;
     private ArrayList<HandleAClient> clients=new ArrayList<>();
     Map<String,String> activeUsers=new HashMap<>();

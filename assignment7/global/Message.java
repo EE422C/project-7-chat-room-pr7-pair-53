@@ -3,6 +3,11 @@ package global;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class Message implements Serializable {
 
@@ -64,6 +69,10 @@ public class Message implements Serializable {
     }
 
 
+    public Timestamp getTime() {
+        return time;
+    }
+
     public String printTime() {
         return time.toString();
     }
@@ -76,6 +85,7 @@ public class Message implements Serializable {
 
     public Message parseString(String tostring) {
 
+        //Message message = new Message();
         if (tostring.substring(0, 1).equals("λ")) {
             String[] separated = tostring.split("~");
 
