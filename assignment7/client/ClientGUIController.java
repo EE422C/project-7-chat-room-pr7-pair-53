@@ -32,7 +32,6 @@ public class ClientGUIController implements Initializable {
     @FXML ListView DMs;
     @FXML ListView room_sel;
     @FXML Menu login_menu;
-    @FXML ListView active_users;
 
     String chattingWith="Broadcast";
     Map<String,String> chatHistory=new HashMap<>();
@@ -115,14 +114,6 @@ send_text.clear();
         activeUsers=m;
         Set<String> users=activeUsers.keySet();
         DMs.setItems(FXCollections.observableArrayList(users));
-        ArrayList<String> userList=new ArrayList<>();
-        for(String usr:activeUsers.keySet()){
-            System.out.println(activeUsers.get(usr));
-            if(activeUsers.get(usr)==chattingWith)
-                userList.add(usr);
-        }
-        System.out.println(userList);
-        active_users.setItems(FXCollections.observableArrayList(users));
 
     }
 

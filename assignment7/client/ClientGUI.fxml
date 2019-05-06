@@ -23,17 +23,7 @@
                                  <content>
                                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                        <children>
-                                          <ListView fx:id="room_sel" onMouseClicked="#selectRoom" prefHeight="130.0" prefWidth="300.0">
-                                             <opaqueInsets>
-                                                <Insets />
-                                             </opaqueInsets>
-                                          </ListView>
-                                          <Label layoutX="10.0" layoutY="140.0" text="Active Users in Current Room:">
-                                             <font>
-                                                <Font name="Helvetica Neue Medium" size="13.0" />
-                                             </font>
-                                          </Label>
-                                          <ListView fx:id="active_users" disable="true" editable="true" focusTraversable="false" layoutY="156.0" onMouseClicked="#selectRoom" prefHeight="160.0" prefWidth="290.0">
+                                          <ListView fx:id="room_sel" onMouseClicked="#selectRoom" prefHeight="316.0" prefWidth="297.0">
                                              <opaqueInsets>
                                                 <Insets />
                                              </opaqueInsets>
