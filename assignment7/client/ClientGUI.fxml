@@ -124,6 +124,11 @@
             <Font name="Helvetica Neue" size="13.0" />
          </font>
       </Label>
+      <Label fx:id="user_name" alignment="CENTER_RIGHT" layoutX="150.0" layoutY="10.0" prefHeight="16.0" prefWidth="147.0" textAlignment="RIGHT" textFill="#007aff">
+         <font>
+            <Font name="Helvetica Neue Bold" size="13.0" />
+         </font>
+      </Label>
     </children>
     <stylesheets>
         <URL value="@ClientGUIStyles.css" />

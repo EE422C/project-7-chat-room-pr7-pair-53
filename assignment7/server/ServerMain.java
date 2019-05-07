@@ -156,6 +156,10 @@ public class ServerMain extends Application { // Text area for displaying conten
                             });
                             broadcastMessage(msg);
                         }
+                    } else if(message.getMode()==3){
+                        for (HandleAClient cl : clients) {
+                            cl.broadcastMessage(message.toInfoString());
+                        }
                     }
 
 

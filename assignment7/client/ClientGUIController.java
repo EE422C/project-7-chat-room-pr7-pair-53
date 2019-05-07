@@ -51,6 +51,7 @@ public class ClientGUIController implements Initializable {
     @FXML Menu login_menu;
     @FXML Label chatting_with;
     @FXML FlowPane gm_sel;
+    @FXML Label user_name;
 
     String chattingWith="Broadcast";
     Map<String,String> chatHistory=new HashMap<>();
@@ -96,6 +97,7 @@ public class ClientGUIController implements Initializable {
     }
 
     public void login(){
+        user_name.setText(username.getText());
         if(fname.getText().equals("")||lname.getText().equals("")||username.getText().equals(""))
             return;
         ArrayList<Object> data=new ArrayList<Object>();
@@ -135,6 +137,13 @@ public class ClientGUIController implements Initializable {
         updateUsers();
     }
 
+    public void updateGMs(List<String> chats){
+        room_sel.getItems().clear();
+        room_sel.getItems().addAll(chats);
+    }
+
+    ArrayList<CheckBox> user_gms=new ArrayList<>();
+
     public void newGM(){
         ArrayList<String> gm_users=new ArrayList<>();
         for(CheckBox u:user_gms){
@@ -142,15 +151,16 @@ public class ClientGUIController implements Initializable {
                 gm_users.add(u.getText());
             u.setSelected(false);
         }
-        System.out.println(gm_users);
+        if(gm_users.size()>1)
+        ClientMain.newGM(gm_users.toString().replace(", ","+").replace("[","").replace("]",""));
     }
 
-    ArrayList<CheckBox> user_gms=new ArrayList<>();
 
     public void updateLocalUsers(List<String> users){
         user_gms.clear();
         for(String u:users){
-            user_gms.add(new CheckBox(u));
+            if(!u.equals(ClientMain.user.getUsername()))
+                user_gms.add(new CheckBox(u));
         }
         gm_sel.getChildren().clear();
         gm_sel.getChildren().addAll(user_gms);

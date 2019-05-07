@@ -112,7 +112,9 @@ public class ClientMain extends Application {
 						msg = msg.parseString(fromServer.readUTF());
 System.out.println(msg.toInfoString());
 						if (msg!=null) {
-							if (msg.getMode() == 0) {
+							if (msg.getFrom() == "Server")				//if from server
+								client.displayMessage(msg.getFrom() + ": " + msg.getBody());
+							else if (msg.getMode() == 0) {
 								if (msg.getTo().equals("Broadcast")) {
 									if (chattingWith.equals("Broadcast"))
 										client.displayMessage(msg.getFrom() + ": " + msg.getBody());	//if on Broadcast
@@ -131,9 +133,7 @@ System.out.println(msg.toInfoString());
 								} else if(msg.getFrom().equals(client.getUsername())){			//if message was sent from you
 									client.displayMessage(msg.getFrom() + ": " + msg.getBody());
 								}
-							} else if (msg.getFrom() == "Server")				//if from server
-								client.displayMessage(msg.getFrom() + ": " + msg.getBody());
-							else if (msg.getMode() == 2) {
+							} else if (msg.getMode() == 2) {
 								System.out.println(msg.getBody());
 								String toMap = msg.getBody();
 								toMap = toMap.substring(1, toMap.length() - 1);
@@ -150,6 +150,10 @@ System.out.println(msg.toInfoString());
 										updateLocalUsers();
 									}
 								});
+							} else if(msg.getMode()==3){
+								if(msg.getBody().contains(user.getUsername())){
+									updateGMs(msg.getBody());
+								}
 							}
 						}
 					} catch (IOException e) {
@@ -206,6 +210,7 @@ System.out.println(msg.toInfoString());
 			welcome.setTo(client.chattingWith);
 			welcome.setFrom(client.getUsername());
 			toServer.writeUTF(welcome.toInfoString());
+			toServer.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -227,6 +232,22 @@ System.out.println(msg.toInfoString());
 		}
 		catch (IOException ex) {
 			System.err.println(ex);
+		}
+	}
+
+	public static void newGM(String gmUsers){
+		String newGMusers=user.getUsername()+"+"+gmUsers;
+		Message newGMmsg=new Message("","",newGMusers,3);
+		try {
+			toServer.writeUTF(newGMmsg.toInfoString());
+			toServer.flush();
+		}catch(Exception e){System.out.println("");}
+	}
+
+	public static void updateGMs(String gm){
+		if(!chatRooms.contains(gm)) {
+			chatRooms.add(gm);
+			client.updateGMs(chatRooms);
 		}
 	}
 
