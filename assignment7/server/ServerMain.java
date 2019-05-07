@@ -20,7 +20,6 @@ package server;
 import java.io.*;
 import java.net.*;
 import java.util.*;
-import java.util.Observable;
 
 import global.Message;
 import global.User;
@@ -30,8 +29,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -45,6 +42,7 @@ public class ServerMain extends Application { // Text area for displaying conten
     private int clientNo = 0;
     private static ArrayList<HandleAClient> clients = new ArrayList<>();
     Map<String, String> activeUsers = new HashMap<>();
+
 
     @Override // Override the start method in the Application class
     public void start(Stage primaryStage) throws Exception {
@@ -60,9 +58,12 @@ public class ServerMain extends Application { // Text area for displaying conten
             try {  // Create a server socket
                 @SuppressWarnings("resource")
                 ServerSocket serverSocket = new ServerSocket(8000);
-                System.out.println(InetAddress.getLocalHost().getHostAddress());
+                String ip = InetAddress.getLocalHost().getHostAddress();
+                System.out.println(ip);
                 server.postToServer("MultiThreadServer started at "
                         + new Date());
+                server.postToServer("This server's IP address is " + ip);
+
 
 
                 while (true) {
@@ -122,7 +123,7 @@ public class ServerMain extends Application { // Text area for displaying conten
                 inputFromClient = new DataInputStream(socket.getInputStream());
                 // Continuously serve the client
                 while (true) {
-                    // Receive radius from the client
+
                     String text = inputFromClient.readUTF();
                     Message message = new Message();
                     message = message.parseString(text);
@@ -136,7 +137,7 @@ public class ServerMain extends Application { // Text area for displaying conten
                             cl.broadcastMessage(message.toInfoString());
                         }
 
-                        // Compute area
+
                         String textback = "SENT to " + message.getTo() + " at " + message.printTime();
 
 
