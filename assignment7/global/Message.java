@@ -82,11 +82,6 @@ public class Message implements Serializable {
         return from;
     }
 
-
-    public Timestamp getTime() {
-        return time;
-    }
-
     public String printTime() {
         return time.toString();
     }
@@ -99,7 +94,6 @@ public class Message implements Serializable {
 
     public Message parseString(String tostring) {
 
-        //Message message = new Message();
         if (tostring.substring(0, 1).equals("λ")) {
             String[] separated = tostring.split("~");
 

@@ -1,5 +1,5 @@
 /*
- * CHATROOM ClientGUIController.java
+ * CHATROOM ClientGUIInitController.java
  * EE422C Project 7 submission by
  * Guy Sexton
  * gwm639

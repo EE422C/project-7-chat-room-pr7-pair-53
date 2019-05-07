@@ -21,20 +21,18 @@ import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import global.Message;
 import global.User;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
+
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -81,12 +79,10 @@ public class ClientMain extends Application {
 			@SuppressWarnings("resource")
 			Socket socket2 = new Socket(host, 8000);
 
-			// Create an input stream to receive data from the server
+
 			toServer = new DataOutputStream(socket2.getOutputStream());
 			fromServer = new DataInputStream(socket2.getInputStream());
 
-			// Create an output stream to send data to the server
-			//toServer = new DataOutputStream(socket.getOutputStream());
 		} catch (IOException ex) {
 			client.displayMessage(ex.toString());
 		}
@@ -119,23 +115,23 @@ System.out.println(msg.toInfoString());
 							if (msg.getMode() == 0) {
 								if (msg.getTo().equals("Broadcast")) {
 									if (chattingWith.equals("Broadcast"))
-										client.displayMessage(msg.getFrom() + ": " + msg.getBody());
+										client.displayMessage(msg.getFrom() + ": " + msg.getBody());	//if on Broadcast
 									else
 										client.displayBackground("Broadcast", msg.getFrom() + ": " + msg.getBody());
-								} else if (msg.getTo().equals(client.getUsername())) {
-									if (chattingWith.equals(msg.getFrom()))
+								} else if (msg.getTo().equals(client.getUsername())) {		//if chat arriving to you
+									if (chattingWith.equals(msg.getFrom()))				//if currently on that DM chat
 										client.displayMessage(msg.getFrom() + ": " + msg.getBody());
 									else
 										client.displayBackground(msg.getFrom(), msg.getFrom() + ": " + msg.getBody());
 								} else if(chatRooms.contains(msg.getTo())){
-									if (chattingWith.equals(msg.getTo()))
+									if (chattingWith.equals(msg.getTo()))		//if currently in chat room where message was sent
 										client.displayMessage(msg.getFrom() + ": " + msg.getBody());
 									else
 										client.displayBackground(msg.getTo(), msg.getFrom() + ": " + msg.getBody());
-								} else if(msg.getFrom().equals(client.getUsername())){
+								} else if(msg.getFrom().equals(client.getUsername())){			//if message was sent from you
 									client.displayMessage(msg.getFrom() + ": " + msg.getBody());
 								}
-							} else if (msg.getFrom() == "Server")
+							} else if (msg.getFrom() == "Server")				//if from server
 								client.displayMessage(msg.getFrom() + ": " + msg.getBody());
 							else if (msg.getMode() == 2) {
 								System.out.println(msg.getBody());
@@ -146,7 +142,7 @@ System.out.println(msg.toInfoString());
 								for (String s : toMapPT2) {
 									userUP.add(s.split("=")[0].trim());
 								}
-								//activeUsers.clear();
+
 								activeUsers = userUP;
 								Platform.runLater(new Runnable() {
 									@Override
@@ -166,7 +162,7 @@ System.out.println(msg.toInfoString());
 
 
 
-		classPrimaryStage.setOnHiding(new EventHandler<WindowEvent>() {
+		classPrimaryStage.setOnHiding(new EventHandler<WindowEvent>() {		//shut down code
             @Override
             public void handle(WindowEvent event) {
                 Platform.runLater(new Runnable() {
@@ -203,7 +199,7 @@ System.out.println(msg.toInfoString());
 	public static void userInit(ArrayList<Object> userData){
 
 		user = new global.User((String)userData.get(0), (String)userData.get(1), (String)userData.get(2));
-		// user = new global.User();
+
 		try {
 			Message welcome;
 			welcome = user.welcomeMessage();
@@ -217,22 +213,11 @@ System.out.println(msg.toInfoString());
 
 	public static void sendMessage(){
 		try {
-			// Get the radius from the text field
-			//double radius = Double.parseDouble(tf.getText().trim());
 
 			String text = client.getMessage().trim();
-			//String text = client.send_text.getText();
 
 			Message message = new Message(client.getUsername(),client.chattingWith,text,0);
 
-			/*
-			// Display to the text area
-            if (message.getMode()==0 && !text.equals("")) {
-                client.displayMessage(user.getUsername() + ": " + text);
-                toServer.writeUTF(message.toInfoString());
-                toServer.flush();
-            }
-*/
 			if (message.getMode()==0 && !text.equals("")) {
 				toServer.writeUTF(message.toInfoString());
 				toServer.flush();
