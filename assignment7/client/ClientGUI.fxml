@@ -86,11 +86,6 @@
                     <menus>
                         <Menu fx:id="login_menu" mnemonicParsing="false" text="Login">
                             <items>
-                        <CustomMenuItem hideOnClick="false" mnemonicParsing="false" text="Host Address">
-                           <content>
-                              <TextField fx:id="host" promptText="Host Address" style="-fx-background-color: -fx-text-box-border, -fx-control-inner-background, transparent; -fx-border-color: #FFFFFF;" />
-                           </content>
-                        </CustomMenuItem>
                                 <CustomMenuItem hideOnClick="false" mnemonicParsing="false" text="First Name">
                                     <content>
                                         <TextField fx:id="fname" promptText="First Name" style="-fx-background-color: -fx-text-box-border, -fx-control-inner-background, transparent; -fx-border-color: #FFFFFF;" />

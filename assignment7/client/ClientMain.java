@@ -41,17 +41,41 @@ import javafx.stage.WindowEvent;
 
 public class ClientMain extends Application {
 	// IO streams
+	static Stage classPrimaryStage;
 	static DataOutputStream toServer = null;
 	static DataInputStream fromServer = null;
 	static public User user;
 	static String chattingWith="Broadcast";
-	ArrayList<String> activeUsers=new ArrayList<>();
-	ArrayList<String> chatRooms=new ArrayList<String>(Arrays.asList("Broadcast","One Room","Two Room","Red Room","Blue Room"));
+	static ArrayList<String> activeUsers=new ArrayList<>();
+	static ArrayList<String> chatRooms=new ArrayList<String>(Arrays.asList("Broadcast","One Room","Two Room","Red Room","Blue Room"));
 
-	FXMLLoader loader = new FXMLLoader();
+	static FXMLLoader InitLoader = new FXMLLoader();
+	static FXMLLoader ClientLoader = new FXMLLoader();
 	static ClientGUIController client;
 
-	public static void updateHost(String host){
+
+
+	@Override // Override the start method in the Application class
+	public void start(Stage primaryStage) throws Exception {
+		classPrimaryStage=primaryStage;
+		InitLoader.setLocation(getClass().getResource("ClientInitGUI.fxml"));
+		ClientLoader.setLocation(getClass().getResource("ClientGUI.fxml"));
+		Parent root = InitLoader.load();
+		primaryStage.setTitle("Connect to yMessage");
+		primaryStage.setScene(new Scene(root));
+		primaryStage.show(); // Display the stage
+	}
+
+	public static void startClient(String host) throws Exception{
+		classPrimaryStage.close();
+		// Create a scene and place it in the stage
+		Parent root = ClientLoader.load();
+		client = ClientLoader.getController();
+		classPrimaryStage.setTitle("yMessage");
+		classPrimaryStage.setScene(new Scene(root));
+		classPrimaryStage.show(); // Display the stage
+		client.setRooms(chatRooms);
+
 		try {
 			// Create a socket to connect to the server
 			@SuppressWarnings("resource")
@@ -66,21 +90,6 @@ public class ClientMain extends Application {
 		} catch (IOException ex) {
 			client.displayMessage(ex.toString());
 		}
-	}
-
-	@Override // Override the start method in the Application class
-	public void start(Stage primaryStage) throws Exception {
-
-		// Create a scene and place it in the stage
-		loader.setLocation(getClass().getResource("ClientGUI.fxml"));
-		Parent root = loader.load();
-		client = loader.getController();
-		primaryStage.setTitle("yMessage");
-		primaryStage.setScene(new Scene(root));
-		primaryStage.show(); // Display the stage
-		client.setRooms(chatRooms);
-
-		//updateHost("localhost");
 
 		Thread usrUpdate=new Thread(new Runnable() {
 			@Override
@@ -100,8 +109,6 @@ public class ClientMain extends Application {
 			@Override
 			public void run() {
 				while (true) {
-					System.out.println("from:"+(fromServer==null));
-					System.out.println("to:"+(toServer==null));
 					try {
 						Message msg = new Message();
 						msg = msg.parseString(fromServer.readUTF());
@@ -157,7 +164,7 @@ System.out.println(msg.toInfoString());
 
 
 
-		primaryStage.setOnHiding(new EventHandler<WindowEvent>() {
+		classPrimaryStage.setOnHiding(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
                 Platform.runLater(new Runnable() {
@@ -192,10 +199,6 @@ System.out.println(msg.toInfoString());
 	}
 
 	public static void userInit(ArrayList<Object> userData){
-
-		updateHost(client.getHost());
-		System.out.println("from:"+(fromServer==null));
-		System.out.println("to:"+(toServer==null));
 
 		user = new global.User((String)userData.get(0), (String)userData.get(1), (String)userData.get(2));
 		// user = new global.User();
@@ -249,7 +252,7 @@ System.out.println(msg.toInfoString());
 		}catch(Exception e){e.printStackTrace();}
 	}
 
-	public void updateLocalUsers(){
+	public static void updateLocalUsers(){
 		client.updateLocalUsers(activeUsers);
 	}
 
