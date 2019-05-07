@@ -34,11 +34,22 @@
                                     <tabs>
                                         <Tab text="           Grext            ">
                                  <content>
-                                                  <ListView fx:id="room_sel" onMouseClicked="#selectRoom" prefHeight="130.0" prefWidth="300.0">
-                                                      <opaqueInsets>
-                                                          <Insets />
-                                                      </opaqueInsets>
-                                                  </ListView>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                                        <ListView fx:id="room_sel" onMouseClicked="#selectRoom" prefHeight="218.0" prefWidth="300.0">
+                                                            <opaqueInsets>
+                                                                <Insets />
+                                                            </opaqueInsets>
+                                                        </ListView>
+                                          <Label layoutX="10.0" layoutY="227.0" prefHeight="22.0" prefWidth="166.0" text="Make a new group with:">
+                                             <font>
+                                                <Font name="Helvetica Neue Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <FlowPane fx:id="gm_sel" hgap="4.0" layoutX="10.0" layoutY="260.0" prefHeight="50.0" prefWidth="274.0" vgap="3.0" />
+                                          <Button layoutX="180.0" layoutY="225.0" mnemonicParsing="false" onAction="#newGM" prefHeight="29.0" prefWidth="110.0" text="Create" />
+                                       </children>
+                                    </AnchorPane>
                                  </content>
                                         </Tab>
                                         <Tab text="    Direct Messages    ">
@@ -108,6 +119,11 @@
                 </MenuBar>
             </children>
         </StackPane>
+      <Label fx:id="chatting_with" alignment="CENTER" layoutX="-127.0" prefHeight="16.0" prefWidth="300.0" textFill="#007aff" translateX="425.0" translateY="7.0">
+         <font>
+            <Font name="Helvetica Neue" size="13.0" />
+         </font>
+      </Label>
     </children>
     <stylesheets>
         <URL value="@ClientGUIStyles.css" />

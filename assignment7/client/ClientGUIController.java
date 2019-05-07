@@ -14,14 +14,17 @@
 
 package client;
 
+import com.sun.tools.javac.comp.Check;
 import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
@@ -46,6 +49,8 @@ public class ClientGUIController implements Initializable {
     @FXML ListView DMs;
     @FXML ListView room_sel;
     @FXML Menu login_menu;
+    @FXML Label chatting_with;
+    @FXML FlowPane gm_sel;
 
     String chattingWith="Broadcast";
     Map<String,String> chatHistory=new HashMap<>();
@@ -99,6 +104,7 @@ public class ClientGUIController implements Initializable {
         data.add(username.getText());
         window.setDisable(false);
         login_menu.hide();
+        chatting_with.setText(chattingWith);
         userInit(data);
         updateUsers();
     }
@@ -111,6 +117,7 @@ public class ClientGUIController implements Initializable {
             chattingWith = newRoom;
             message_window.setText(chatHistory.get(chattingWith));
             updateChattingWith(chattingWith);
+            chatting_with.setText(chattingWith);
         }
         updateUsers();
     }
@@ -123,11 +130,30 @@ public class ClientGUIController implements Initializable {
             chattingWith = newRoom;
             message_window.setText(chatHistory.get(chattingWith));
             updateChattingWith(chattingWith);
+            chatting_with.setText(chattingWith);
         }
         updateUsers();
     }
 
+    public void newGM(){
+        ArrayList<String> gm_users=new ArrayList<>();
+        for(CheckBox u:user_gms){
+            if(u.isSelected())
+                gm_users.add(u.getText());
+            u.setSelected(false);
+        }
+        System.out.println(gm_users);
+    }
+
+    ArrayList<CheckBox> user_gms=new ArrayList<>();
+
     public void updateLocalUsers(List<String> users){
+        user_gms.clear();
+        for(String u:users){
+            user_gms.add(new CheckBox(u));
+        }
+        gm_sel.getChildren().clear();
+        gm_sel.getChildren().addAll(user_gms);
         DMs.getItems().clear();
         DMs.getItems().addAll(users);
     }

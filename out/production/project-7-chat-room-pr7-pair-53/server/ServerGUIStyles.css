@@ -11,12 +11,6 @@
  * Spring 2019
  */
 
-
-@font-face {
-    -fx-font-family: SFHeavy ;
-    src: url("ServerGraphics/Fonts/SF-Heavy.otf");
-}
-
 .root {
     -fx-shadow-highlight-color: #ffffff;
     -fx-background: #ffffff;

@@ -62,3 +62,61 @@
 .text-field:focused {
     -fx-faint-focus-color: transparent; /*JavaFX 8*/
 }
+
+.button{
+    -fx-text-fill:#007AFF;
+    -fx-background-color: #ffffff;
+    -fx-border-color:#007AFF;
+    -fx-border-radius: .25em ;
+}
+
+.button:pressed{
+    -fx-text-fill: #005ab4;
+    -fx-background-color: #cdcdcd;
+    -fx-border-color:#005ab4;
+    -fx-border-radius: .25em ;
+}
+
+.text-area{
+    -fx-border-color: #FFFFFF;
+}
+
+.list-view{
+    -fx-border-color: #FFFFFF;
+}
+
+.tab-pane{
+    -fx-background-color: #ffffff;
+}
+.tab-pane *.tab-header-background{
+    -fx-background-color: #ffffff;
+}
+.tab{
+    -fx-border-color: #FFFFFF;
+    -fx-background-color: #007AFF;
+    -fx-background-radius: .25em;
+    -fx-font-family: "Helvetica Neue";
+}
+.tab:selected{
+    -fx-background-color: #0073dc;
+}
+.tab-label:selected{
+    -fx-text-fill: #cdcdcd;
+}
+.tab-label{
+    -fx-text-fill: #ffffff;
+}
+.check-box{
+    -fx-background-radius:6em;
+    -fx-background-color: #EFEFF4;
+    -fx-label-padding: 0 5 0 5;
+    -fx-padding: 3px;
+}
+.check-box .box{
+    -fx-border-radius: 6em;
+    -fx-background-color: transparent;
+    -fx-border-color: #007AFF;
+}
+.check-box .mark{
+
+}
