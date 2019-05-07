@@ -46,6 +46,7 @@ public class ServerMain extends Application { // Text area for displaying conten
     private static ArrayList<HandleAClient> clients = new ArrayList<>();
     Map<String, String> activeUsers = new HashMap<>();
 
+
     @Override // Override the start method in the Application class
     public void start(Stage primaryStage) throws Exception {
         // Create a scene and place it in the stage
@@ -60,9 +61,12 @@ public class ServerMain extends Application { // Text area for displaying conten
             try {  // Create a server socket
                 @SuppressWarnings("resource")
                 ServerSocket serverSocket = new ServerSocket(8000);
-                System.out.println(InetAddress.getLocalHost().getHostAddress());
+                String ip = InetAddress.getLocalHost().getHostAddress();
+                System.out.println(ip);
                 server.postToServer("MultiThreadServer started at "
                         + new Date());
+                server.postToServer("This server's IP address is " + ip);
+
 
 
                 while (true) {

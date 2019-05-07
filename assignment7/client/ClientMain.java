@@ -96,6 +96,8 @@ public class ClientMain extends Application {
 
 			}
 		});
+
+
 		Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
