@@ -1,0 +1,122 @@
+/*
+ * CHATROOM ClientGUIStyles.css
+ * EE422C Project 7 submission by
+ * Guy Sexton
+ * gwm639
+ * 16190
+ * Dylan Wolford
+ * ddw2379
+ * 16190
+ * Slip days used: 0
+ * Spring 2019
+ */
+
+
+.root {
+    -fx-shadow-highlight-color: #ffffff;
+    -fx-background: #ffffff;
+    -fx-control-inner-background: #FFFFFF;
+    -fx-base: #ffffff;
+    -fx-border-color: #FFFFFF;
+    -fx-font-family: "Helvetica Neue";
+}
+/* iOS Blue #007AFF */
+.menu-bar{
+    -fx-background-color: #FFFFFF;
+    -fx-font-family: "Helvetica Neue";
+    -fx-text-fill: #007AFF;
+}
+
+.menu .label
+{
+    -fx-text-fill: #007AFF;
+}
+
+.menu .text-field{
+    -fx-font-family: "Helvetica Neue";
+    -fx-background-color: -fx-text-box-border, -fx-control-inner-background, #FFFFFF;
+    -fx-border-radius: 0;
+}
+
+.menu .text-field:focused{
+    -fx-faint-focus-color: transparent; /*JavaFX 8*/
+}
+
+.menu .button{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: #007AFF;
+}
+
+.text-area{
+    -fx-border-color: #FFFFFF;
+    -fx-faint-focus-color: #FFFFFF;
+    -fx-background-color: -fx-text-box-border, -fx-control-inner-background,#FFFFFF;
+    -fx-highlight-fill: #FFFFFF;
+}
+
+.text-field{
+    -fx-background-color: -fx-text-box-border, -fx-control-inner-background, transparent;
+}
+
+.text-field:focused {
+    -fx-faint-focus-color: transparent; /*JavaFX 8*/
+}
+
+.button{
+    -fx-text-fill:#007AFF;
+    -fx-background-color: #ffffff;
+    -fx-border-color:#007AFF;
+    -fx-border-radius: .25em ;
+}
+
+.button:pressed{
+    -fx-text-fill: #005ab4;
+    -fx-background-color: #cdcdcd;
+    -fx-border-color:#005ab4;
+    -fx-border-radius: .25em ;
+}
+
+.text-area{
+    -fx-border-color: #FFFFFF;
+}
+
+.list-view{
+    -fx-border-color: #FFFFFF;
+}
+
+.tab-pane{
+    -fx-background-color: #ffffff;
+}
+.tab-pane *.tab-header-background{
+    -fx-background-color: #ffffff;
+}
+.tab{
+    -fx-border-color: #FFFFFF;
+    -fx-background-color: #007AFF;
+    -fx-background-radius: .25em;
+    -fx-font-family: "Helvetica Neue";
+}
+.tab:selected{
+    -fx-background-color: #0073dc;
+}
+.tab-label:selected{
+    -fx-text-fill: #cdcdcd;
+}
+.tab-label{
+    -fx-text-fill: #ffffff;
+}
+.check-box{
+    -fx-background-radius:6em;
+    -fx-background-color: #EFEFF4;
+    -fx-label-padding: 0 5 0 5;
+    -fx-padding: 3px;
+}
+.check-box .box{
+    -fx-border-radius: 6em;
+    -fx-background-color: transparent;
+    -fx-border-color: #007AFF;
+}
+.check-box .mark{
+
+}

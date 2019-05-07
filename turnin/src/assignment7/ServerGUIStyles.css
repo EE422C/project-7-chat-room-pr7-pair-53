@@ -1,0 +1,44 @@
+/*
+ * CHATROOM ServerGUIStyles.css
+ * EE422C Project 7 submission by
+ * Guy Sexton
+ * gwm639
+ * 16190
+ * Dylan Wolford
+ * ddw2379
+ * 16190
+ * Slip days used: 0
+ * Spring 2019
+ */
+
+.root {
+    -fx-shadow-highlight-color: #ffffff;
+    -fx-background: #ffffff;
+    -fx-control-inner-background: #FFFFFF;
+    -fx-base: #ffffff;
+    -fx-border-color: #FFFFFF;
+    -fx-color: -fx-base;
+    -fx-body-color: #ffffff;
+    -fx-text-base-color: #ffffff;
+    -fx-dark-text-color: black;
+    -fx-mid-text-color: #333333;
+    -fx-font-family: "Helvetica Neue";
+}
+
+.button{
+    -fx-text-fill:#007AFF;
+    -fx-background-color: #ffffff;
+    -fx-border-color:#007AFF;
+    -fx-border-radius: .25em ;
+}
+
+.button:pressed{
+    -fx-text-fill: #005ab4;
+    -fx-background-color: #cdcdcd;
+    -fx-border-color:#005ab4;
+    -fx-border-radius: .25em ;
+}
+
+.text-area{
+    -fx-border-color: #FFFFFF;
+}
